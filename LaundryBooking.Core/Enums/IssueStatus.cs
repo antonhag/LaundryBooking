@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LaundryBooking.Core.Enums
+﻿namespace LaundryBooking.Core.Enums
 {
-    internal class IssueStatus
+    public enum IssueStatus
     {
+        Open,
+        Ongoing,
+        Resolved
     }
 }

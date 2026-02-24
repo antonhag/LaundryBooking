@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LaundryBooking.Core.Enums;
 
 namespace LaundryBooking.Core.Models
 {
-    internal class IssueReport
+    public class IssueReport
     {
+        public string Id { get; set; } = string.Empty;
+        public string ApartmentNumber { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public IssueStatus Status { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

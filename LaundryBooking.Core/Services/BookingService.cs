@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LaundryBooking.Core.Services
 {
-    internal class BookingService
+    public class BookingService
     {
     }
 }

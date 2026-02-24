@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LaundryBooking.Core.Enums
+﻿namespace LaundryBooking.Core.Enums
 {
-    internal class TimeSlot
+    public enum TimeSlot
     {
+        Morning,   // 07:00 - 12:00
+        Afternoon, // 12:00 - 17:00
+        Evening    // 17:00 - 21:00
     }
 }

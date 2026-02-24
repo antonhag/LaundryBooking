@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LaundryBooking.Core.Repositories
+namespace LaundryBooking.Core.Interfaces
 {
-    internal class IIssueRepository
+    public interface IIssueRepository
     {
     }
 }

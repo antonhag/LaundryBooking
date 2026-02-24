@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LaundryBooking.Core.Repositories
 {
-    internal class MongoBookingRepository
+    public class MongoBookingRepository
     {
     }
 }

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="LaundryBookin.ConsoleTest/LaundryBookin.ConsoleTest.csproj" />
+  <Project Path="LaundryBooking.Core/LaundryBooking.Core.csproj" />
+</Solution>

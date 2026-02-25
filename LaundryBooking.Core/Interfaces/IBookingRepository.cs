@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LaundryBooking.Core.Models;
 
 namespace LaundryBooking.Core.Interfaces
 {
     public interface IBookingRepository
     {
+        Task<List<Booking>> GetBookingsByDateAsync(DateOnly date);
+        Task<List<Booking>> GetBookingsByApartmentAsync(string apartmentNumber);
+        Task CreateBookingAsync(Booking booking);
+        Task DeleteBookingAsync(string id);
     }
 }

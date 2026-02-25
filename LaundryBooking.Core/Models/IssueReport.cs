@@ -5,6 +5,7 @@ namespace LaundryBooking.Core.Models
     public class IssueReport
     {
         public string Id { get; set; } = string.Empty;
+        public string HousingCooperativeId { get; set; } = string.Empty;
         public string ApartmentNumber { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public IssueStatus Status { get; set; }

@@ -1,12 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LaundryBooking.Core.Interfaces;
+using LaundryBooking.Core.Models;
 
 namespace LaundryBooking.Core.Services
 {
     public class BookingService
     {
+        private readonly IBookingRepository _bookingRepository;
+
+        public BookingService(IBookingRepository bookingRepository)
+        {
+            _bookingRepository = bookingRepository;
+        }
+
+        public async Task<List<Booking>> GetBookingsByDateAsync(DateOnly date)
+        {
+            var bookingRepository =  await _bookingRepository.GetBookingsByDateAsync(date);
+            return bookingRepository;
+        }
+
+        public async Task<List<Booking>> GetBookingsByApartmentAsync(string apartmentNumber)
+        {
+            var bookings =  await _bookingRepository.GetBookingsByApartmentAsync(apartmentNumber);
+            return bookings;
+        }
+
+        public async Task<bool> CreateBookingAsync(Booking booking)
+        {
+            var existingBookings = await _bookingRepository.GetBookingsByDateAsync(booking.Date);
+
+            bool slotTaken = existingBookings.Any(b => b.TimeSlot == booking.TimeSlot);
+            if (slotTaken)
+            {
+                return false;
+            }
+            
+            bool apartmentAlreadyBooked = existingBookings.Any(b => b.ApartmentNumber == booking.ApartmentNumber);
+            if (apartmentAlreadyBooked)
+            {
+                return false;
+            }
+
+            await _bookingRepository.CreateBookingAsync(booking);
+            return true;
+        }
+
+        public async Task DeleteBookingAsync(string id)
+        {
+            await _bookingRepository.DeleteBookingAsync(id);
+        }
     }
 }

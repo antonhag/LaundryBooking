@@ -1,12 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LaundryBooking.Core.Data;
+using LaundryBooking.Core.Interfaces;
+using LaundryBooking.Core.Models;
+using MongoDB.Driver;
 
 namespace LaundryBooking.Core.Repositories
 {
-    public class MongoBookingRepository
+    public class MongoBookingRepository : IBookingRepository // Kan bara bli initierad en gång, i konstruktorn
     {
+        private readonly IMongoCollection<Booking> _bookings;
+
+        public MongoBookingRepository(string connectionString)
+        {
+            _bookings = MongoDbContext.GetBookingCollection(connectionString);
+        }
+
+        public async Task<List<Booking>> GetBookingsByDateAsync(DateOnly date)
+        {
+            var booking = await _bookings.Find(b => b.Date == date).ToListAsync();
+            return booking;
+        }
+
+        public async Task<List<Booking>> GetBookingsByApartmentAsync(string apartmentNumber)
+        {
+            var bookings = await _bookings.Find(b => b.ApartmentNumber == apartmentNumber).ToListAsync();
+            return bookings;
+        }
+
+        public async Task CreateBookingAsync(Booking booking)
+        {
+            await _bookings.InsertOneAsync(booking);
+        }
+
+        public async Task DeleteBookingAsync(string id)
+        {
+            await _bookings.DeleteOneAsync(b => b.Id == id);
+        }
     }
 }

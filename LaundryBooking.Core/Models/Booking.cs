@@ -4,7 +4,7 @@ namespace LaundryBooking.Core.Models
 {
     public class Booking
     {
-        public string Id { get; set; } = string.Empty;
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string HousingCooperativeId { get; set; } = string.Empty;
         public string ApartmentNumber { get; set; } = string.Empty;
         public DateOnly Date { get; set; }

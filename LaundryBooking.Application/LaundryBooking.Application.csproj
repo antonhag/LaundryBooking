@@ -10,8 +10,4 @@
       <ProjectReference Include="..\LaundryBooking.Domain\LaundryBooking.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Interfaces\" />
-    </ItemGroup>
-
 </Project>

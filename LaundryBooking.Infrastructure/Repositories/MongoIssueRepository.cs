@@ -11,9 +11,9 @@ namespace LaundryBooking.Infrastructure.Repositories
     {
         private readonly IMongoCollection<IssueReport> _issues; // Kan bara bli initierad en gång, i konstruktorn
 
-        public MongoIssueRepository(string connectionString)
+        public MongoIssueRepository(MongoDbContext context)
         {
-            _issues = MongoDbContext.GetIssueReportCollection(connectionString);
+            _issues = context.IssueReports;
         }
 
         public async Task<List<IssueReport>> GetAllIssuesAsync()

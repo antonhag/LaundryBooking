@@ -5,29 +5,18 @@ namespace LaundryBooking.Infrastructure.Data
 {
     public class MongoDbContext
     {
-        private static MongoClient GetClient(string connectionString)
+        private readonly IMongoDatabase _database;
+
+        public MongoDbContext(string connectionString)
         {
             var settings = MongoClientSettings.FromConnectionString(connectionString);
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-            return new MongoClient(settings);
+            var client = new MongoClient(settings);
+            _database = client.GetDatabase("LaundryBookingDb");
         }
 
-        public static IMongoCollection<Booking> GetBookingCollection(string connectionString)
-        {
-            var database = GetClient(connectionString).GetDatabase("LaundryBookingDb");
-            return database.GetCollection<Booking>("Bookings");
-        }
-
-        public static IMongoCollection<IssueReport> GetIssueReportCollection(string connectionString)
-        {
-            var database = GetClient(connectionString).GetDatabase("LaundryBookingDb");
-            return database.GetCollection<IssueReport>("IssueReports");
-        }
-
-        public static IMongoCollection<HousingCooperative> GetHousingCooperativeCollection(string connectionString)
-        {
-            var database = GetClient(connectionString).GetDatabase("LaundryBookingDb");
-            return database.GetCollection<HousingCooperative>("HousingCooperatives");
-        }
+        public IMongoCollection<Booking> Bookings => _database.GetCollection<Booking>("Bookings");
+        public IMongoCollection<IssueReport> IssueReports => _database.GetCollection<IssueReport>("IssueReports");
+        public IMongoCollection<HousingCooperative> HousingCooperatives => _database.GetCollection<HousingCooperative>("HousingCooperatives");
     }
 }

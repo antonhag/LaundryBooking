@@ -1,9 +1,10 @@
-﻿using LaundryBooking.Domain.Entities;
+﻿using LaundryBooking.Application.Interfaces;
+using LaundryBooking.Domain.Entities;
 using LaundryBooking.Domain.Interfaces;
 
 namespace LaundryBooking.Application.Services
 {
-    public class BookingService
+    public class BookingService : IBookingService
     {
         private readonly IBookingRepository _bookingRepository;
 

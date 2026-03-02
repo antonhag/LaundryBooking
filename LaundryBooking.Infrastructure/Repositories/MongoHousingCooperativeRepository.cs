@@ -10,9 +10,9 @@ namespace LaundryBooking.Infrastructure.Repositories
     {
         private readonly IMongoCollection<HousingCooperative> _housingCooperatives; // Kan bara bli initierad en gång, i konstruktorn
 
-        public MongoHousingCooperativeRepository(string connectionString)
+        public MongoHousingCooperativeRepository(MongoDbContext context)
         {
-            _housingCooperatives = MongoDbContext.GetHousingCooperativeCollection(connectionString);
+            _housingCooperatives = context.HousingCooperatives;
         }
 
         public async Task<List<HousingCooperative>> GetAllHousingCooperativesAsync()

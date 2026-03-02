@@ -1,9 +1,10 @@
+using LaundryBooking.Application.Interfaces;
 using LaundryBooking.Domain.Interfaces;
 using LaundryBooking.Domain.Entities;
 
 namespace LaundryBooking.Application.Services
 {
-    public class HousingCooperativeService
+    public class HousingCooperativeService : IHousingCooperativeService
     {
         private readonly IHousingCooperativeRepository _housingCooperativeRepository;
 

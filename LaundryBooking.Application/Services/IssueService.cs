@@ -1,10 +1,11 @@
-﻿using LaundryBooking.Domain.Enums;
+﻿using LaundryBooking.Application.Interfaces;
+using LaundryBooking.Domain.Enums;
 using LaundryBooking.Domain.Interfaces;
 using LaundryBooking.Domain.Entities;
 
 namespace LaundryBooking.Application.Services
 {
-    public class IssueService
+    public class IssueService : IIssueService
     {
         private readonly IIssueRepository _issueRepository;
 

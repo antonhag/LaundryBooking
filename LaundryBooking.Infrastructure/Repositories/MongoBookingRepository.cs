@@ -5,13 +5,13 @@ using MongoDB.Driver;
 
 namespace LaundryBooking.Infrastructure.Repositories
 {
-    public class MongoBookingRepository : IBookingRepository // Kan bara bli initierad en gång, i konstruktorn
+    public class MongoBookingRepository : IBookingRepository 
     {
-        private readonly IMongoCollection<Booking> _bookings;
+        private readonly IMongoCollection<Booking> _bookings; // Kan bara bli initierad en gång, i konstruktorn
 
-        public MongoBookingRepository(string connectionString)
+        public MongoBookingRepository(MongoDbContext context)
         {
-            _bookings = MongoDbContext.GetBookingCollection(connectionString);
+            _bookings = context.Bookings;
         }
 
         public async Task<List<Booking>> GetBookingsByDateAsync(DateOnly date)

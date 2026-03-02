@@ -1,4 +1,4 @@
-namespace LaundryBooking.Core.Services
+namespace LaundryBooking.Application.Services
 {
     public class SessionService
     {

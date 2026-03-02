@@ -1,6 +1,6 @@
-﻿using LaundryBooking.Core.Interfaces;
-using LaundryBooking.Core.Repositories;
-using LaundryBooking.Core.Services;
+﻿using LaundryBooking.Domain.Interfaces;
+using LaundryBooking.Infrastructure.Repositories;
+using LaundryBooking.Application.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 

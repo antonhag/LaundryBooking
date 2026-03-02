@@ -1,7 +1,7 @@
-using LaundryBooking.Core.Models;
+using LaundryBooking.Domain.Entities;
 using MongoDB.Driver;
 
-namespace LaundryBooking.Core.Data
+namespace LaundryBooking.Infrastructure.Data
 {
     public class MongoDbContext
     {

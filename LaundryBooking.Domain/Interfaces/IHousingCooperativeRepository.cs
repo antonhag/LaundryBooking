@@ -1,6 +1,6 @@
-using LaundryBooking.Core.Models;
+using LaundryBooking.Domain.Entities;
 
-namespace LaundryBooking.Core.Interfaces
+namespace LaundryBooking.Domain.Interfaces
 {
     public interface IHousingCooperativeRepository
     {

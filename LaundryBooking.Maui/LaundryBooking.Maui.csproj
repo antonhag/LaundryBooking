@@ -69,7 +69,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LaundryBooking.Core\LaundryBooking.Core.csproj" />
+      <ProjectReference Include="..\LaundryBooking.Application\LaundryBooking.Application.csproj" />
+      <ProjectReference Include="..\LaundryBooking.Infrastructure\LaundryBooking.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,14 +1,14 @@
-﻿using LaundryBooking.Core.Enums;
+﻿using LaundryBooking.Domain.Enums;
 
-namespace LaundryBooking.Core.Models
+namespace LaundryBooking.Domain.Entities
 {
-    public class Booking
+    public class IssueReport
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string HousingCooperativeId { get; set; } = string.Empty;
         public string ApartmentNumber { get; set; } = string.Empty;
-        public DateOnly Date { get; set; }
-        public TimeSlot TimeSlot { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public IssueStatus Status { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

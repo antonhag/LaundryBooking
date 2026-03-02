@@ -1,10 +1,10 @@
-using LaundryBooking.Core.Data;
-using LaundryBooking.Core.Interfaces;
-using LaundryBooking.Core.Models;
+using LaundryBooking.Infrastructure.Data;
+using LaundryBooking.Domain.Interfaces;
+using LaundryBooking.Domain.Entities;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-namespace LaundryBooking.Core.Repositories
+namespace LaundryBooking.Infrastructure.Repositories
 {
     public class MongoHousingCooperativeRepository : IHousingCooperativeRepository
     {

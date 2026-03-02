@@ -1,4 +1,4 @@
-namespace LaundryBooking.Core.Models
+namespace LaundryBooking.Domain.Entities
 {
     public class HousingCooperative
     {

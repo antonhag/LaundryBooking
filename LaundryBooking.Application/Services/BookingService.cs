@@ -1,7 +1,7 @@
-﻿using LaundryBooking.Core.Interfaces;
-using LaundryBooking.Core.Models;
+﻿using LaundryBooking.Domain.Entities;
+using LaundryBooking.Domain.Interfaces;
 
-namespace LaundryBooking.Core.Services
+namespace LaundryBooking.Application.Services
 {
     public class BookingService
     {

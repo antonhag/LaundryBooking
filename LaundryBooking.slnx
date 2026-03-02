@@ -1,5 +1,8 @@
 <Solution>
   <Project Path="LaundryBookin.ConsoleTest/LaundryBookin.ConsoleTest.csproj" />
+  <Project Path="LaundryBooking.Application/LaundryBooking.Application.csproj" />
   <Project Path="LaundryBooking.Core/LaundryBooking.Core.csproj" />
+  <Project Path="LaundryBooking.Domain/LaundryBooking.Domain.csproj" />
+  <Project Path="LaundryBooking.Infrastructure/LaundryBooking.Infrastructure.csproj" />
   <Project Path="LaundryBooking.Maui/LaundryBooking.Maui.csproj" />
 </Solution>

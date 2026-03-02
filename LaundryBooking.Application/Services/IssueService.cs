@@ -1,8 +1,8 @@
-﻿using LaundryBooking.Core.Enums;
-using LaundryBooking.Core.Interfaces;
-using LaundryBooking.Core.Models;
+﻿using LaundryBooking.Domain.Enums;
+using LaundryBooking.Domain.Interfaces;
+using LaundryBooking.Domain.Entities;
 
-namespace LaundryBooking.Core.Services
+namespace LaundryBooking.Application.Services
 {
     public class IssueService
     {

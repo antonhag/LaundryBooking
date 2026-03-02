@@ -1,7 +1,7 @@
-﻿using LaundryBooking.Core.Enums;
-using LaundryBooking.Core.Models;
+﻿using LaundryBooking.Domain.Enums;
+using LaundryBooking.Domain.Entities;
 
-namespace LaundryBooking.Core.Interfaces
+namespace LaundryBooking.Domain.Interfaces
 {
     public interface IIssueRepository
     {

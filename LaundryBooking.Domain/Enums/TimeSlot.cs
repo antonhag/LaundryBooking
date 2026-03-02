@@ -1,4 +1,4 @@
-﻿namespace LaundryBooking.Core.Enums
+﻿namespace LaundryBooking.Domain.Enums
 {
     public enum TimeSlot
     {

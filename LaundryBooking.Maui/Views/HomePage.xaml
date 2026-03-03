@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryBooking.Maui.Views.HomePage"
+             BackgroundColor="#F5F0EB">
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <Grid>
+                <Image
+                    Source="laundrypic.png"
+                    Aspect="AspectFill"
+                    HeightRequest="250"/>
+                <VerticalStackLayout 
+                    Padding="16" 
+                    VerticalOptions="Start">
+                    <Label
+                        Text="Boka tvättstuga"
+                        TextColor="White"
+                        FontSize="24"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="Välkommen"
+                        TextColor="White"
+                        FontSize="16"/>
+                </VerticalStackLayout>
+            </Grid>
+            <Grid
+                RowDefinitions="Auto, Auto, Auto"
+                ColumnDefinitions="*, *"
+                Padding="16"
+                RowSpacing="12"
+                ColumnSpacing="12">
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="IDAG"
+                    TextColor="Grey"
+                    FontSize="17"
+                    FontFamily="OpenSansSemibold">
+                </Label>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="Måndag 3 mars"
+                    TextColor="Grey"
+                    FontSize="17"
+                    FontFamily="OpenSansSemibold"
+                    HorizontalOptions="End"></Label>
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="100"
+                    Text="Boka tid"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="17"
+                    BackgroundColor="#3D6B68"
+                    TextColor="White"
+                    CornerRadius="16"
+                    Clicked="OnClickedGoToBookingPage" />
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HeightRequest="100"
+                    VerticalOptions="Fill"
+                    Text="Hantera bokningar"
+                    FontFamily="OpenSansSemibold"
+                    BackgroundColor="#D4C9BC"
+                    TextColor="#2C2C2C"
+                    FontSize="17"
+                    CornerRadius="16"
+                    Clicked="OnClickedGoToManageBookingPage" />
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HeightRequest="100"
+                    VerticalOptions="Fill"
+                    Text="Skapa felanmälan"
+                    FontFamily="OpenSansSemibold"
+                    BackgroundColor="#D4C9BC"
+                    TextColor="#2C2C2C"
+                    FontSize="17"
+                    CornerRadius="16"
+                    Clicked="OnClickedGoToIssueReportPage" />
+            </Grid>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

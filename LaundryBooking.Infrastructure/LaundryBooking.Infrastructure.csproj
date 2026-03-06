@@ -11,7 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LaundryBooking.Application\LaundryBooking.Application.csproj" />
       <ProjectReference Include="..\LaundryBooking.Domain\LaundryBooking.Domain.csproj" />
     </ItemGroup>
 

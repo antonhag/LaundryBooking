@@ -42,7 +42,7 @@
                 <Label
                     Grid.Row="0"
                     Grid.Column="1"
-                    Text="Måndag 3 mars"
+                    Text="{Binding TodayDate}"
                     TextColor="Grey"
                     FontSize="17"
                     FontFamily="OpenSansSemibold"

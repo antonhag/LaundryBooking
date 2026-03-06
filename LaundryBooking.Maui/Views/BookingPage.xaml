@@ -2,8 +2,52 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LaundryBooking.Maui.Views.BookingPage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+             xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar" 
+             x:Class="LaundryBooking.Maui.Views.BookingPage"
+             BackgroundColor="#F5F0EB">
+    
+    <VerticalStackLayout>
+        <Image
+            Source="laundrypic.png"
+            Aspect="AspectFill"
+            HeightRequest="250"/>
+        <cal:Calendar
+            SelectedDate="{Binding SelectedDate}"
+            BackgroundColor="#F5F0EB"
+            SelectedDayBackgroundColor="#3D6B68"
+            SelectedDayTextColor="White"
+            OtherMonthDayColor="#B0A898"
+            TodayOutlineColor="#3D6B68"
+            TodayTextColor="#3D6B68"/>
+        <CollectionView                                                                                                                
+            ItemsSource="{Binding AvailableTimeSlots}"                                                                                 
+            SelectedItem="{Binding SelectedTimeSlot}" 
+            SelectionMode="Single"
+            Margin="16,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                        BackgroundColor="#3D6B68" 
+                        StrokeShape="RoundRectangle 12" 
+                        Margin="0,4" 
+                        Padding="16">
+                        <Label 
+                            Text="{Binding DisplayText}" 
+                            HorizontalTextAlignment="Center"
+                            TextColor="White" 
+                            FontFamily="OpenSansSemibold"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button                                                                                                                        
+            Text="Boka"        
+            Command="{Binding BookCommand}"
+            BackgroundColor="#3D6B68"                                                                                                  
+            TextColor="White"                                                                                                          
+            CornerRadius="16"
+            FontFamily="OpenSansSemibold"
+            Margin="16,12"
+            HeightRequest="60"/>
+    </VerticalStackLayout>
 </ContentPage>

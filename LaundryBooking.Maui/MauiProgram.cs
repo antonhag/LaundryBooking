@@ -3,6 +3,8 @@ using LaundryBooking.Application.Services;
 using LaundryBooking.Domain.Interfaces;
 using LaundryBooking.Infrastructure.Data;
 using LaundryBooking.Infrastructure.Repositories;
+using LaundryBooking.Maui.ViewModels;
+using LaundryBooking.Maui.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -26,7 +28,11 @@ public static class MauiProgram
         using var stream = assembly.GetManifestResourceStream("LaundryBooking.Maui.appsettings.json"); // öppnar appsettings.json filen där connection strängen finns
         var config = new ConfigurationBuilder().AddJsonStream(stream!).Build();
         var connectionString = config["MongoDb:ConnectionString"]!;
-
+        
+#if DEBUG
+        builder.Logging.AddDebug();
+#endif
+        
         // Registrera MongoDbContext
         builder.Services.AddSingleton(new MongoDbContext(connectionString));
 
@@ -41,9 +47,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<IHousingCooperativeService, HousingCooperativeService>();
         builder.Services.AddSingleton<SessionService>(); // Även här AddSingleton för att använda samma session genom alla olika pages
 
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
+        // Registrera pages                                                                                                            
+        builder.Services.AddTransient<HomePage>();                                                                                   
+        builder.Services.AddTransient<BookingPage>();                                                                                  
+        builder.Services.AddTransient<ManageBookingPage>();                                                                            
+        builder.Services.AddTransient<IssueReportPage>();
+        
+        // Registrera viewmodels                                                                                                      
+        builder.Services.AddTransient<BookingViewModel>();
 
         return builder.Build();
     }

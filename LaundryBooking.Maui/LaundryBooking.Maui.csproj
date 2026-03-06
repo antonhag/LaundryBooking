@@ -59,9 +59,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
+        <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0"/>
+        <PackageReference Include="Plugin.Maui.Calendar" Version="3.0.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -71,10 +72,6 @@
     <ItemGroup>
       <ProjectReference Include="..\LaundryBooking.Application\LaundryBooking.Application.csproj" />
       <ProjectReference Include="..\LaundryBooking.Infrastructure\LaundryBooking.Infrastructure.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="ViewModels\" />
     </ItemGroup>
 
 </Project>

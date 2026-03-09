@@ -8,19 +8,19 @@
         <VerticalStackLayout>
             <Grid>
                 <Image
-                    Source="laundrypic.png"
-                    Aspect="AspectFill"
-                    HeightRequest="250"/>
+                    x:Name="WashMachineImage"
+                    Source="laundrypic2.png"
+                    Aspect="AspectFill"/>
                 <VerticalStackLayout 
                     Padding="16" 
                     VerticalOptions="Start">
                     <Label
-                        Text="Boka tvättstuga"
+                        Text="Välkommen"
                         TextColor="White"
-                        FontSize="24"
+                        FontSize="22"
                         FontAttributes="Bold"/>
                     <Label
-                        Text="Välkommen"
+                        Text="Anton"
                         TextColor="White"
                         FontSize="16"/>
                 </VerticalStackLayout>

@@ -55,6 +55,8 @@ public static class MauiProgram
         
         // Registrera viewmodels                                                                                                      
         builder.Services.AddTransient<BookingViewModel>();
+        builder.Services.AddTransient<ManageBookingViewModel>();                                                                       
+
 
         return builder.Build();
     }

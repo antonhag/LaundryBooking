@@ -2,8 +2,59 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LaundryBooking.Maui.Views.ManageBookingPage">
+             x:Class="LaundryBooking.Maui.Views.ManageBookingPage"
+             BackgroundColor="#F5F0EB">
     <ContentPage.Content>
-        
+        <VerticalStackLayout>
+            <Grid>
+                <Image
+                    Source="laundrypic2.png"
+                    Aspect="AspectFill"
+                    HeightRequest="250"/>
+            </Grid>
+            <Label
+                Text="Hantera bokningar"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#3D6B68"
+                Padding="16,8"/>
+            <CollectionView                                                                                                                
+                ItemsSource="{Binding Bookings}"                                                                                           
+                Margin="16,0">                                                                                                             
+                <CollectionView.ItemTemplate>                                                                                              
+                    <DataTemplate>                                                                                                         
+                        <Border                                                                                                            
+                            BackgroundColor="#D4C9BC"                                                                                      
+                            StrokeShape="RoundRectangle 12"
+                            Margin="0,4"
+                            Padding="16"
+                            >
+                            <Grid 
+                                RowDefinitions="Auto, Auto">
+                                <VerticalStackLayout Grid.Row="0">
+                                    <Label
+                                        Text="{Binding Date}"
+                                        FontFamily="OpenSansSemibold"
+                                        TextColor="#2C2C2C"/>
+                                    <Label
+                                        Text="{Binding TimeSlotDisplayText}"
+                                        TextColor="#2C2C2C"/>
+                                </VerticalStackLayout>
+                                <Button
+                                    Grid.Row="0"
+                                    Text="Ta bort"
+                                    BackgroundColor="#C0392B"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    VerticalOptions="Start"
+                                    HorizontalOptions="End"
+                                    Clicked="OnClickedDeleteBooking"
+                                    CommandParameter="{Binding .}"/> <!-- "." gör så att hela booking skickas med som parameter till OnClickedDeleteBooking -->
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

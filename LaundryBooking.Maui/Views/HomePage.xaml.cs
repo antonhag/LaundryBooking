@@ -13,6 +13,7 @@ public partial class HomePage : ContentPage
     {
         InitializeComponent();
         BindingContext = new HomeViewModel();
+        WashMachineImage.HeightRequest = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density * 0.3;
     }
 
     private async void OnClickedGoToBookingPage(object? sender, EventArgs e)

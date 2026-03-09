@@ -9,7 +9,11 @@ using LaundryBooking.Domain.Enums;
 namespace LaundryBooking.Maui.ViewModels;
 
 // Används för att hålla ett tidspass (enum, tex Morning) och en display text "07:00-12:00"
-public record TimeSlotOption(TimeSlot TimeSlot, string DisplayText);
+public record TimeSlotOption(TimeSlot TimeSlot, string DisplayText, bool IsAvailable)
+{
+    // Sätter färg på bordern beroende på ifall tiden är ledig(grön) eller upptagen(grå)
+    public Color BackgroundColor => IsAvailable ? Color.FromArgb("#3D6B68") : Color.FromArgb("#B0A898"); 
+}
 
 // ViewModel för bokningssidan, implementerar INotifyPropertyChanged för att UI:t ska uppdateras automatiskt
 public class BookingViewModel : INotifyPropertyChanged
@@ -97,11 +101,10 @@ public class BookingViewModel : INotifyPropertyChanged
             { TimeSlot.Evening, "17:00-21:00" }
         };
         
-        // Kollar efter alla lediga tidspass, tar bort de som är bokade redan
+        // Kollar efter tidspass och sorterar de på färger beroende på ifall de är lediga eller upptagna
         AvailableTimeSlots = new ObservableCollection<TimeSlotOption>
             (allSlots
-                .Where(kvp => !takenSlots.Contains(kvp.Key)) // Behåller endast lediga pass
-                .Select(kvp => new TimeSlotOption(kvp.Key, kvp.Value))); // Skapar ett TimeSlotOption för varje ledigt pass
+                .Select(kvp => new TimeSlotOption(kvp.Key, kvp.Value, !takenSlots.Contains(kvp.Key)))); // Skapar ett TimeSlotOption för varje pass
     }
 
     public async void CreateBookingAsync()

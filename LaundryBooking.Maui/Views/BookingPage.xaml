@@ -8,7 +8,7 @@
     
     <VerticalStackLayout>
         <Image
-            Source="laundrypic.png"
+            Source="laundrypic2.png"
             Aspect="AspectFill"
             HeightRequest="250"/>
         <cal:Calendar
@@ -27,7 +27,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border 
-                        BackgroundColor="#3D6B68" 
+                        BackgroundColor="{Binding BackgroundColor}" 
                         StrokeShape="RoundRectangle 12" 
                         Margin="0,4" 
                         Padding="16">

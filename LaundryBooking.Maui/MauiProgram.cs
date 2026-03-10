@@ -1,4 +1,5 @@
-﻿using LaundryBooking.Application.Interfaces;
+﻿using LaundryBooking.Application.Facade;
+using LaundryBooking.Application.Interfaces;
 using LaundryBooking.Application.Services;
 using LaundryBooking.Domain.Interfaces;
 using LaundryBooking.Infrastructure.Data;
@@ -45,7 +46,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<IBookingService, BookingService>(); // MAUI skapar BookingService automatiskt och injicerar IBookingRepository som redan är registrerad ovan.
         builder.Services.AddSingleton<IIssueService, IssueService>();
         builder.Services.AddSingleton<IHousingCooperativeService, HousingCooperativeService>();
-        builder.Services.AddSingleton<SessionService>(); // Även här AddSingleton för att använda samma session genom alla olika pages
+        builder.Services.AddSingleton(SessionService.GetSession()); // Även här AddSingleton för att använda samma session genom alla olika pages
+        builder.Services.AddSingleton<IBookingFacade, BookingFacade>(); 
 
         // Registrera pages                                                                                                            
         builder.Services.AddTransient<HomePage>();                                                                                   

@@ -64,14 +64,15 @@ public class BookingViewModel : INotifyPropertyChanged
     }
     
     // Båda services injiceras via konstruktorn istället för att skapas här
-    private readonly IBookingService _bookingService;                                                                              
+    private readonly IBookingFacade _bookingFacade;                                                                              
     private readonly SessionService _sessionService;
 
     // Tar emot services via dependency injection
-    public BookingViewModel(IBookingService bookingService, SessionService sessionService)
+    public BookingViewModel(IBookingFacade bookingFacade, SessionService sessionService)
     {
-        _bookingService = bookingService;
+        _bookingFacade = bookingFacade;
         _sessionService = sessionService;
+        _sessionService.SetSession("1306", "f3a2c1d4-8b7e-4f6a-9c5d-2e1b0a3f7e8c"); // Temporär
         BookCommand = new Command(() => CreateBookingAsync());
     }
     
@@ -90,9 +91,13 @@ public class BookingViewModel : INotifyPropertyChanged
         // Konverterar DateTime till DateOnly eftersom databasen lagrar endast DateOnly
         var date = DateOnly.FromDateTime(_selectedDate.Value); 
         
-        var existingBookings = await _bookingService.GetBookingsByDateAsync(date);
-
-        var takenSlots = existingBookings.Select(b => b.TimeSlot).ToList();
+        // Utan Facade behövde BookingViewmodel hämta bokningar och filtrera själv
+        // var existingBookings = await _bookingService.GetBookingsByDateAsync(date);
+        //
+        // var takenSlots = existingBookings.Select(b => b.TimeSlot).ToList();
+        
+        // Facade hanterar logiken för att hämta lediga tider
+        var availableSlots = await _bookingFacade.GetAvailableTimeSlotsAsync(date);
 
         var allSlots = new Dictionary<TimeSlot, string>
         {
@@ -104,7 +109,7 @@ public class BookingViewModel : INotifyPropertyChanged
         // Kollar efter tidspass och sorterar de på färger beroende på ifall de är lediga eller upptagna
         AvailableTimeSlots = new ObservableCollection<TimeSlotOption>
             (allSlots
-                .Select(kvp => new TimeSlotOption(kvp.Key, kvp.Value, !takenSlots.Contains(kvp.Key)))); // Skapar ett TimeSlotOption för varje pass
+                .Select(kvp => new TimeSlotOption(kvp.Key, kvp.Value, availableSlots.Contains(kvp.Key)))); // Skapar ett TimeSlotOption för varje pass
     }
 
     public async void CreateBookingAsync()
@@ -113,6 +118,12 @@ public class BookingViewModel : INotifyPropertyChanged
         {
             await Shell.Current.DisplayAlert("Fel", "Välj ett datum och ett tidspass först.", "OK");                                   
             return;  
+        }
+        
+        if (!SelectedTimeSlot.IsAvailable)
+        {
+            await Shell.Current.DisplayAlertAsync("Fel", "Den här tiden är redan bokad.", "OK");
+            return;
         }
         
         var date = DateOnly.FromDateTime(_selectedDate.Value);
@@ -125,13 +136,13 @@ public class BookingViewModel : INotifyPropertyChanged
             TimeSlot = SelectedTimeSlot.TimeSlot
         };
         
-        var success = await _bookingService.CreateBookingAsync(newBooking);
+        var success = await _bookingFacade.CreateBookingAsync(newBooking); // Facade validerar och skapar bokningen
 
         if (success)
         {
             await Shell.Current.DisplayAlertAsync("Klart", "Bokningen är skapad!", "OK");
         }
-        else
+        if (!SelectedTimeSlot.IsAvailable)
         {
             await Shell.Current.DisplayAlertAsync("Fel", "Tiden är redan bokad.", "OK");
         }

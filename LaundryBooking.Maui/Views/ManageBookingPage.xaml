@@ -14,8 +14,9 @@
             </Grid>
             <Label
                 Text="Hantera bokningar"
-                FontSize="20"
+                FontSize="24"
                 FontAttributes="Bold"
+                FontFamily="OpenSansSemibold"
                 TextColor="#3D6B68"
                 Padding="16,8"/>
             <CollectionView                                                                                                                

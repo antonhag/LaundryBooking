@@ -72,8 +72,7 @@ public class BookingViewModel : INotifyPropertyChanged
     {
         _bookingFacade = bookingFacade;
         _sessionService = sessionService;
-        _sessionService.SetSession("1306", "f3a2c1d4-8b7e-4f6a-9c5d-2e1b0a3f7e8c"); // Temporär
-        BookCommand = new Command(() => CreateBookingAsync());
+        BookCommand = new Command(CreateBookingAsync);
     }
     
     // Anropas när en property förändras, för att rita om UI, tex när någon bokat en tid

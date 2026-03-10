@@ -2,8 +2,71 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LaundryBooking.Maui.Views.IssueReportPage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+             x:Class="LaundryBooking.Maui.Views.IssueReportPage"
+             BackgroundColor="#F5F0EB">
+    <VerticalStackLayout>
+        <Image
+            Source="laundrypic2.png"
+            Aspect="AspectFill"
+            HeightRequest="300"/>
+        <Label
+            Padding="16,8"
+            Text="Ny felanmälan"
+            TextColor="#3D6B68"
+            FontSize="24"
+            FontFamily="OpenSansSemibold">
+        </Label>
+        <Grid
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+            ColumnDefinitions="*"
+            RowSpacing="10"
+            Padding="10"
+            Margin="10">
+            <Label
+                Grid.Row="0"
+                Text="Rubrik"
+                TextColor="#3D6B68"
+                FontSize="20"
+                FontFamily="OpenSansSemibold">
+            </Label>
+            <Entry
+                Grid.Row="1"
+                Text="{Binding Title}"
+                HeightRequest="50"
+                BackgroundColor="#D4C9BC"
+                TextColor="Black"
+                FontSize="17"
+                FontFamily="OpenSansSemibold"
+                Placeholder="Skriv en kort rubrik om ärendet">
+            </Entry>
+            <Label
+                Grid.Row="2"
+                Text="Beskrivning"
+                TextColor="#3D6B68"
+                FontSize="20"
+                FontFamily="OpenSansSemibold">
+            </Label>
+            <Editor                                                                                                            
+                Grid.Row="3"         
+                Text="{Binding Description}"
+                BackgroundColor="#D4C9BC"     
+                TextColor="Black"
+                Placeholder="Skriv en beskrivning om ärendet"
+                HeightRequest="120"
+                FontSize="17"
+                FontFamily="OpenSansSemibold"
+                AutoSize="Disabled"/>
+            <Button
+                Grid.Row="4"
+                Text="Skicka"
+                BackgroundColor="#B5673A"
+                TextColor="White"
+                CornerRadius="16"
+                FontFamily="OpenSansSemibold"
+                HeightRequest="60"
+                Margin="0,8,0,0"
+                Command="{Binding CreateIssueReportCommand}"/>
+            
+        </Grid>
+    </VerticalStackLayout>
 </ContentPage>

@@ -41,6 +41,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IBookingRepository, MongoBookingRepository>(); // AddSingleton betyder att den skapar en instans och använder den konstant sedan
         builder.Services.AddSingleton<IIssueRepository, MongoIssueRepository>();
         builder.Services.AddSingleton<IHousingCooperativeRepository, MongoHousingCooperativeRepository>();
+        builder.Services.AddSingleton<INewsRepository, MongoNewsRepository>();
 
         // Registrera services
         builder.Services.AddSingleton<IBookingService, BookingService>(); // MAUI skapar BookingService automatiskt och injicerar IBookingRepository som redan är registrerad ovan.
@@ -48,17 +49,21 @@ public static class MauiProgram
         builder.Services.AddSingleton<IHousingCooperativeService, HousingCooperativeService>();
         builder.Services.AddSingleton(SessionService.GetSession()); // Även här AddSingleton för att använda samma session genom alla olika pages
         builder.Services.AddSingleton<IBookingFacade, BookingFacade>(); 
+        builder.Services.AddSingleton<INewsService, NewsService>();
 
         // Registrera pages                                                                                                            
         builder.Services.AddTransient<HomePage>();                                                                                   
         builder.Services.AddTransient<BookingPage>();                                                                                  
         builder.Services.AddTransient<ManageBookingPage>();                                                                            
         builder.Services.AddTransient<IssueReportPage>();
+        builder.Services.AddTransient<NewsPage>();                                                                                   
         
         // Registrera viewmodels                                                                                                      
         builder.Services.AddTransient<BookingViewModel>();
         builder.Services.AddTransient<ManageBookingViewModel>();     
         builder.Services.AddTransient<IssueReportViewModel>();
+        builder.Services.AddTransient<HomeViewModel>();
+        builder.Services.AddTransient<NewsViewModel>();
 
 
         return builder.Build();

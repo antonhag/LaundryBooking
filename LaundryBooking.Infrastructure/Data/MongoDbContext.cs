@@ -18,5 +18,6 @@ namespace LaundryBooking.Infrastructure.Data
         public IMongoCollection<Booking> Bookings => _database.GetCollection<Booking>("Bookings");
         public IMongoCollection<IssueReport> IssueReports => _database.GetCollection<IssueReport>("IssueReports");
         public IMongoCollection<HousingCooperative> HousingCooperatives => _database.GetCollection<HousingCooperative>("HousingCooperatives");
+        public IMongoCollection<NewsPost> NewsPosts => _database.GetCollection<NewsPost>("NewsPosts");
     }
 }

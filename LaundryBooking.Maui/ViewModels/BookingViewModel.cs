@@ -24,7 +24,7 @@ public class BookingViewModel : INotifyPropertyChanged
     public ICommand BookCommand { get; } 
     
     // Valda datumet från kalendern
-    private DateTime? _selectedDate;
+    private DateTime? _selectedDate = DateTime.Today;
 
     public DateTime? SelectedDate
     {
@@ -104,6 +104,15 @@ public class BookingViewModel : INotifyPropertyChanged
             { TimeSlot.Afternoon, "12:00-17:00" },
             { TimeSlot.Evening, "17:00-21:00" }
         };
+        
+        // Ta bort passerade tider om datumet är idag
+        if (date == DateOnly.FromDateTime(DateTime.Today))
+        {
+            var currentHour = DateTime.Now.Hour;
+            if (currentHour >= 12) allSlots.Remove(TimeSlot.Morning);
+            if (currentHour >= 17) allSlots.Remove(TimeSlot.Afternoon);
+            if (currentHour >= 21) allSlots.Remove(TimeSlot.Evening);
+        }
         
         // Kollar efter tidspass och sorterar de på färger beroende på ifall de är lediga eller upptagna
         AvailableTimeSlots = new ObservableCollection<TimeSlotOption>

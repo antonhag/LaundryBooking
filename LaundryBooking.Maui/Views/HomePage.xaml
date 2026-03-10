@@ -10,7 +10,8 @@
                 <Image
                     x:Name="WashMachineImage"
                     Source="laundrypic2.png"
-                    Aspect="AspectFill"/>
+                    Aspect="AspectFill"
+                    HeightRequest="250"/>
                 <VerticalStackLayout 
                     Padding="16" 
                     VerticalOptions="Start">
@@ -26,7 +27,7 @@
                 </VerticalStackLayout>
             </Grid>
             <Grid
-                RowDefinitions="Auto, Auto, Auto"
+                RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
                 ColumnDefinitions="*, *"
                 Padding="16"
                 RowSpacing="12"
@@ -83,6 +84,73 @@
                     FontSize="17"
                     CornerRadius="16"
                     Clicked="OnClickedGoToIssueReportPage" />
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="NYHETER"
+                    TextColor="Grey"
+                    FontSize="17"
+                    FontFamily="OpenSansSemibold">
+                </Label>
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Text="Se alla"
+                    TextColor="#3D6B68"
+                    FontSize="17"
+                    FontFamily="OpenSansSemibold"
+                    HorizontalOptions="End">
+                    <!-- Gör text-labeln klickbar -->
+                    <Label.GestureRecognizers> 
+                        <TapGestureRecognizer
+                            Tapped="OnClickedGoToNewsPage"></TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                <CollectionView
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    ItemsSource="{Binding NewsPosts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                BackgroundColor="#E8E0D5"
+                                StrokeShape="RoundRectangle 12"
+                                Padding="16"
+                                Margin="0,4">
+                                <VerticalStackLayout>
+                                    <Label
+                                        Text="{Binding Title}"
+                                        FontFamily="OpenSansSemibold"
+                                        FontSize="17"
+                                        TextColor="#2C2C2C">
+                                        </Label>
+                                    <Label
+                                        Text="{Binding Content}"
+                                        FontSize="14"
+                                        TextColor="#2C2C2C"
+                                    ></Label>
+                                </VerticalStackLayout>
+                                
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    </CollectionView>
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Text="{Binding HousingCooperativeName, StringFormat='Brf. {0}'}"
+                    TextColor="Grey"
+                    FontSize="17"
+                    FontFamily="OpenSansSemibold"/>
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    Text="{Binding ApartmentNumber, StringFormat='Lgh. {0}'}"
+                    TextColor="Grey"
+                    FontSize="17"
+                    FontFamily="OpenSansSemibold"/>
             </Grid>
         </VerticalStackLayout>
     </ContentPage.Content>

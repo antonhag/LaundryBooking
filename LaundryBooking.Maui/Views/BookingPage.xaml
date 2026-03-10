@@ -2,7 +2,8 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar" 
+             xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              x:Class="LaundryBooking.Maui.Views.BookingPage"
              BackgroundColor="#F5F0EB">
     
@@ -13,6 +14,7 @@
             HeightRequest="250"/>
         <cal:Calendar
             SelectedDate="{Binding SelectedDate}"
+            MinimumDate="{x:Static sys:DateTime.Today}"                                                                      
             BackgroundColor="#F5F0EB"
             SelectedDayBackgroundColor="#3D6B68"
             SelectedDayTextColor="White"

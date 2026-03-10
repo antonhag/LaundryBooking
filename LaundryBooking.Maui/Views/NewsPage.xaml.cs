@@ -1,0 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using LaundryBooking.Maui.ViewModels;
+
+namespace LaundryBooking.Maui.Views;
+
+public partial class NewsPage : ContentPage
+{
+    public NewsPage(NewsViewModel newsViewModel)
+    {
+        InitializeComponent();
+        BindingContext = newsViewModel;
+    }
+}

@@ -10,11 +10,12 @@ namespace LaundryBooking.Maui.Views;
 
 public partial class HomePage : ContentPage
 {
-    public HomePage()
+    public HomePage(HomeViewModel homeViewModel)
     {
         InitializeComponent();
-        BindingContext = new HomeViewModel();
         SessionService.GetSession().SetSession("1306", "f3a2c1d4-8b7e-4f6a-9c5d-2e1b0a3f7e8c"); // Temporär
+        homeViewModel.ReloadNewsAsync();
+        BindingContext = homeViewModel;
         WashMachineImage.HeightRequest = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density * 0.3;
     }
 
@@ -32,5 +33,10 @@ public partial class HomePage : ContentPage
     private async void OnClickedGoToIssueReportPage(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(IssueReportPage));   
+    }
+
+    private async void OnClickedGoToNewsPage(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(NewsPage));
     }
 }

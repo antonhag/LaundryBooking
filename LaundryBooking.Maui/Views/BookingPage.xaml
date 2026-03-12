@@ -45,8 +45,8 @@
         <Button
             Text="Boka"
             Command="{Binding BookCommand}"
-            IsEnabled="{Binding SelectedTimeSlot.IsAvailable, FallbackValue=False}"
-            BackgroundColor="#B5673A"
+            IsEnabled="{Binding CanBook}"
+            BackgroundColor="{Binding ButtonColor}"
             TextColor="White"
             CornerRadius="16"
             FontFamily="OpenSansSemibold"

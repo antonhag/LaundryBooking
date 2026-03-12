@@ -65,9 +65,31 @@ public class BookingViewModel : INotifyPropertyChanged
             }
             _selectedTimeSlot = value;
             OnPropertyChanged(nameof(SelectedTimeSlot));
+            OnPropertyChanged(nameof(CanBook));
+            OnPropertyChanged(nameof(ButtonColor));
         }
     }
-    
+
+    private static readonly Color ActiveColor = Color.FromArgb("#B5673A");
+    private static readonly Color InactiveColor = Color.FromArgb("#B0A898");
+
+    // Styr om bokningsknappen är aktiv, kräver att ett ledigt tidspass är valt
+    public bool CanBook
+    {
+        get
+        {
+            if (_selectedTimeSlot == null)
+            {
+                return false;
+            }
+            
+            return _selectedTimeSlot.IsAvailable;
+        }
+    }
+
+    // Variabel som styr bokningsknappens färg, om CanBok == true är den orange annars grå
+    public Color ButtonColor => CanBook ? ActiveColor : InactiveColor;
+
     // Båda services injiceras via konstruktorn istället för att skapas här
     private readonly IBookingFacade _bookingFacade;                                                                              
     private readonly SessionService _sessionService;
@@ -147,11 +169,13 @@ public class BookingViewModel : INotifyPropertyChanged
 
         if (success)
         {
+            SelectedTimeSlot = null; // Nollställ val så knappen blir grå
             await Shell.Current.DisplayAlertAsync("Klart", "Bokningen är skapad!", "OK");
             LoadAvailableTimeSlotsAsync(); // Ladda om så den bokade slotten visas som upptagen
         }
         else
         {
+            SelectedTimeSlot = null;
             await Shell.Current.DisplayAlertAsync("Fel", "Tiden är redan bokad.", "OK");
             LoadAvailableTimeSlotsAsync(); // Ladda om för att synka med databasen
         }

@@ -35,12 +35,6 @@ namespace LaundryBooking.Application.Services
                 return false;
             }
             
-            bool apartmentAlreadyBooked = existingBookings.Any(b => b.ApartmentNumber == booking.ApartmentNumber);
-            if (apartmentAlreadyBooked)
-            {
-                return false;
-            }
-
             await _bookingRepository.CreateBookingAsync(booking);
             return true;
         }

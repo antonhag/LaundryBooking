@@ -12,8 +12,8 @@
                     Source="laundrypic2.png"
                     Aspect="AspectFill"
                     HeightRequest="250"/>
-                <VerticalStackLayout 
-                    Padding="16" 
+                <VerticalStackLayout
+                    Padding="16"
                     VerticalOptions="Start">
                     <Label
                         Text="Välkommen"
@@ -24,10 +24,20 @@
                         Text="{Binding GivenName}"
                         TextColor="White"
                         FontSize="16"/>
+                    <Label
+                        Text="{Binding HousingCooperativeName, StringFormat='Brf. {0}'}"
+                        TextColor="White"
+                        FontSize="14"
+                        FontFamily="OpenSansSemibold"/>
+                    <Label
+                        Text="{Binding ApartmentNumber, StringFormat='Lgh. {0}'}"
+                        TextColor="White"
+                        FontSize="14"
+                        FontFamily="OpenSansSemibold"/>
                 </VerticalStackLayout>
             </Grid>
             <Grid
-                RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
                 ColumnDefinitions="*, *"
                 Padding="16"
                 RowSpacing="12"
@@ -136,21 +146,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                     </CollectionView>
-                <Label
-                    Grid.Row="5"
-                    Grid.Column="0"
-                    Text="{Binding HousingCooperativeName, StringFormat='Brf. {0}'}"
-                    TextColor="Grey"
-                    FontSize="17"
-                    FontFamily="OpenSansSemibold"/>
-                <Label
-                    Grid.Row="5"
-                    Grid.Column="1"
-                    HorizontalOptions="End"
-                    Text="{Binding ApartmentNumber, StringFormat='Lgh. {0}'}"
-                    TextColor="Grey"
-                    FontSize="17"
-                    FontFamily="OpenSansSemibold"/>
             </Grid>
         </VerticalStackLayout>
     </ContentPage.Content>

@@ -49,11 +49,11 @@ public class IssueReportViewModel : INotifyPropertyChanged
         CreateIssueReportCommand = new Command(CreateIssueReportAsync);
     }
 
-    public async void CreateIssueReportAsync()
+    private async void CreateIssueReportAsync()
     {
         if (string.IsNullOrWhiteSpace(_title) || string.IsNullOrWhiteSpace(_description)) 
         {
-            await Shell.Current.DisplayAlert("Fel", "Varken rubrik eller beskrivning kan vara tom.", "OK");                                   
+            await Shell.Current.DisplayAlertAsync("Fel", "Varken rubrik eller beskrivning kan vara tom.", "OK");                                   
             return;  
         }
         
@@ -68,7 +68,7 @@ public class IssueReportViewModel : INotifyPropertyChanged
         };
         
         await _issueService.CreateIssueAsync(newIssueReport);
-        await Shell.Current.DisplayAlert("Klart", "Felanmälan skickad!", "OK");
+        await Shell.Current.DisplayAlertAsync("Klart", "Felanmälan skickad!", "OK");
         await Shell.Current.Navigation.PopAsync();                                                                           
     }
     

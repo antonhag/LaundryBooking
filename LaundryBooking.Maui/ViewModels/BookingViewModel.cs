@@ -52,12 +52,17 @@ public class BookingViewModel : INotifyPropertyChanged
         }
     }
     
-    private TimeSlotOption? _selectedTimeSlot;                                                                                     
-    public TimeSlotOption? SelectedTimeSlot                                                                                      
+    private TimeSlotOption? _selectedTimeSlot;
+    public TimeSlotOption? SelectedTimeSlot
     {
         get { return _selectedTimeSlot; }
         set
         {
+            // Ignorera klick på upptagna tider
+            if (value != null && !value.IsAvailable)
+            {
+                return;
+            }
             _selectedTimeSlot = value;
             OnPropertyChanged(nameof(SelectedTimeSlot));
         }
@@ -96,7 +101,7 @@ public class BookingViewModel : INotifyPropertyChanged
         // var takenSlots = existingBookings.Select(b => b.TimeSlot).ToList();
         
         // Facade hanterar logiken för att hämta lediga tider
-        var availableSlots = await _bookingFacade.GetAvailableTimeSlotsAsync(date);
+        var availableSlots = await _bookingFacade.GetAvailableTimeSlotsAsync(date, _sessionService.HousingCooperativeId);
 
         var allSlots = new Dictionary<TimeSlot, string>
         {
@@ -120,22 +125,16 @@ public class BookingViewModel : INotifyPropertyChanged
                 .Select(kvp => new TimeSlotOption(kvp.Key, kvp.Value, availableSlots.Contains(kvp.Key)))); // Skapar ett TimeSlotOption för varje pass
     }
 
-    public async void CreateBookingAsync()
+    private async void CreateBookingAsync()
     {
         if (_selectedDate == null || SelectedTimeSlot == null)
         {
-            await Shell.Current.DisplayAlert("Fel", "Välj ett datum och ett tidspass först.", "OK");                                   
-            return;  
-        }
-        
-        if (!SelectedTimeSlot.IsAvailable)
-        {
-            await Shell.Current.DisplayAlertAsync("Fel", "Den här tiden är redan bokad.", "OK");
+            await Shell.Current.DisplayAlertAsync("Fel", "Välj ett datum och ett tidspass först.", "OK");
             return;
         }
-        
+
         var date = DateOnly.FromDateTime(_selectedDate.Value);
-        
+
         var newBooking = new Booking()
         {
             HousingCooperativeId = _sessionService.HousingCooperativeId,
@@ -143,16 +142,18 @@ public class BookingViewModel : INotifyPropertyChanged
             Date = date,
             TimeSlot = SelectedTimeSlot.TimeSlot
         };
-        
+
         var success = await _bookingFacade.CreateBookingAsync(newBooking); // Facade validerar och skapar bokningen
 
         if (success)
         {
             await Shell.Current.DisplayAlertAsync("Klart", "Bokningen är skapad!", "OK");
+            LoadAvailableTimeSlotsAsync(); // Ladda om så den bokade slotten visas som upptagen
         }
-        if (!SelectedTimeSlot.IsAvailable)
+        else
         {
             await Shell.Current.DisplayAlertAsync("Fel", "Tiden är redan bokad.", "OK");
+            LoadAvailableTimeSlotsAsync(); // Ladda om för att synka med databasen
         }
     }
 }

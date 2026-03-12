@@ -4,7 +4,7 @@ namespace LaundryBooking.Application.Interfaces;
 
 public interface IBookingService
 {
-    Task<List<Booking>> GetBookingsByDateAsync(DateOnly date);
+    Task<List<Booking>> GetBookingsByDateAsync(DateOnly date, string housingCooperativeId);
     Task<List<Booking>> GetBookingsByApartmentAsync(string apartmentNumber);
     Task<bool> CreateBookingAsync(Booking booking);
     Task DeleteBookingAsync(string id);

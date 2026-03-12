@@ -1,6 +1,7 @@
 ﻿using LaundryBooking.Application.Facade;
 using LaundryBooking.Application.Interfaces;
 using LaundryBooking.Application.Services;
+using LaundryBooking.Application.Settings;
 using LaundryBooking.Domain.Interfaces;
 using LaundryBooking.Infrastructure.Data;
 using LaundryBooking.Infrastructure.Repositories;
@@ -29,6 +30,9 @@ public static class MauiProgram
         using var stream = assembly.GetManifestResourceStream("LaundryBooking.Maui.appsettings.json"); // öppnar appsettings.json filen där connection strängen finns
         var config = new ConfigurationBuilder().AddJsonStream(stream!).Build();
         var connectionString = config["MongoDb:ConnectionString"]!;
+        var clientId = config["Google:ClientId"]!; // Google id
+
+        builder.Services.AddSingleton(new GoogleAuthSettings { ClientId = clientId });
         
 #if DEBUG
         builder.Logging.AddDebug();
@@ -50,13 +54,15 @@ public static class MauiProgram
         builder.Services.AddSingleton(SessionService.GetSession()); // Även här AddSingleton för att använda samma session genom alla olika pages
         builder.Services.AddSingleton<IBookingFacade, BookingFacade>(); 
         builder.Services.AddSingleton<INewsService, NewsService>();
+        builder.Services.AddSingleton<ILoginFacade, LoginFacade>();
 
         // Registrera pages                                                                                                            
         builder.Services.AddTransient<HomePage>();                                                                                   
         builder.Services.AddTransient<BookingPage>();                                                                                  
         builder.Services.AddTransient<ManageBookingPage>();                                                                            
         builder.Services.AddTransient<IssueReportPage>();
-        builder.Services.AddTransient<NewsPage>();                                                                                   
+        builder.Services.AddTransient<NewsPage>();      
+        builder.Services.AddTransient<LoginPage>();                                                                                   
         
         // Registrera viewmodels                                                                                                      
         builder.Services.AddTransient<BookingViewModel>();
@@ -64,6 +70,7 @@ public static class MauiProgram
         builder.Services.AddTransient<IssueReportViewModel>();
         builder.Services.AddTransient<HomeViewModel>();
         builder.Services.AddTransient<NewsViewModel>();
+        builder.Services.AddTransient<LoginViewModel>();
 
 
         return builder.Build();

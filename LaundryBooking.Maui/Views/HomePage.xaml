@@ -21,7 +21,7 @@
                         FontSize="22"
                         FontAttributes="Bold"/>
                     <Label
-                        Text="Anton"
+                        Text="{Binding GivenName}"
                         TextColor="White"
                         FontSize="16"/>
                 </VerticalStackLayout>

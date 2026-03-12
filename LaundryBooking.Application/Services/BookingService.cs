@@ -13,9 +13,9 @@ namespace LaundryBooking.Application.Services
             _bookingRepository = bookingRepository;
         }
 
-        public async Task<List<Booking>> GetBookingsByDateAsync(DateOnly date)
+        public async Task<List<Booking>> GetBookingsByDateAsync(DateOnly date, string housingCooperativeId)
         {
-            var bookingRepository =  await _bookingRepository.GetBookingsByDateAsync(date);
+            var bookingRepository = await _bookingRepository.GetBookingsByDateAsync(date, housingCooperativeId);
             return bookingRepository;
         }
 
@@ -27,7 +27,7 @@ namespace LaundryBooking.Application.Services
 
         public async Task<bool> CreateBookingAsync(Booking booking)
         {
-            var existingBookings = await _bookingRepository.GetBookingsByDateAsync(booking.Date);
+            var existingBookings = await _bookingRepository.GetBookingsByDateAsync(booking.Date, booking.HousingCooperativeId);
 
             bool slotTaken = existingBookings.Any(b => b.TimeSlot == booking.TimeSlot);
             if (slotTaken)

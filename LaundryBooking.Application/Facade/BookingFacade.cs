@@ -4,20 +4,18 @@ using LaundryBooking.Domain.Enums;
 
 namespace LaundryBooking.Application.Facade;
 
-public class BookingFacade : IBookingFacade // Facade design pattern
+public class BookingFacade : IBookingFacade // Facade design pattern    
 {
     private readonly IBookingService _bookingService;
-    private readonly IHousingCooperativeService _housingCooperativeService;
-    
-    public BookingFacade(IBookingService bookingService, IHousingCooperativeService housingCooperativeService)
+
+    public BookingFacade(IBookingService bookingService)
     {
         _bookingService = bookingService;
-        _housingCooperativeService = housingCooperativeService;
     }
 
-    public async Task<List<TimeSlot>> GetAvailableTimeSlotsAsync(DateOnly date)
+    public async Task<List<TimeSlot>> GetAvailableTimeSlotsAsync(DateOnly date, string housingCooperativeId)
     {
-        var existingBookings = await _bookingService.GetBookingsByDateAsync(date);
+        var existingBookings = await _bookingService.GetBookingsByDateAsync(date, housingCooperativeId);
         
         var takenSlots = existingBookings.Select(b => b.TimeSlot).ToList();
         
@@ -27,12 +25,6 @@ public class BookingFacade : IBookingFacade // Facade design pattern
 
     public async Task<bool> CreateBookingAsync(Booking booking)
     {
-       var housingCooperative = await _housingCooperativeService.GetHousingCooperativeByIdAsync(booking.HousingCooperativeId);
-       if (housingCooperative == null || !housingCooperative.ApartmentNumbers.Contains(booking.ApartmentNumber))
-       {
-           return false;
-       }
-       
-       return await _bookingService.CreateBookingAsync(booking);
+        return await _bookingService.CreateBookingAsync(booking);
     }
 }

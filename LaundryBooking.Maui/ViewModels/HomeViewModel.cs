@@ -15,7 +15,16 @@ public class HomeViewModel : INotifyPropertyChanged
     private readonly SessionService _sessionService;
 
     public string TodayDate { get; set; } = DateTime.Now.ToString("dddd d MMMM", new CultureInfo("sv-SE"));
-    public string ApartmentNumber => _sessionService.ApartmentNumber;
+    
+    public string ApartmentNumber
+    {
+        get { return _sessionService.ApartmentNumber; }
+    }
+
+    public string GivenName
+    {
+        get { return _sessionService.GivenName; }
+    }
 
     private string _housingCooperativeName = string.Empty;
     public string HousingCooperativeName
@@ -44,16 +53,8 @@ public class HomeViewModel : INotifyPropertyChanged
         _newsService = newsService;
         _housingCooperativeService = housingCooperativeService;
         _sessionService = sessionService;
-        LoadNewsPostsAsync();
     }
 
-    private async void LoadNewsPostsAsync()
-    {
-        var posts = await _newsService.GetPostsByHousingCooperativeAsync(_sessionService.HousingCooperativeId);
-        posts = posts.OrderByDescending(p => p.CreatedAt).Take(3).ToList();
-        NewsPosts = new ObservableCollection<NewsPost>(posts);
-    }
-    
     public async void ReloadNewsAsync()
     {
         var posts = await _newsService.GetPostsByHousingCooperativeAsync(_sessionService.HousingCooperativeId);

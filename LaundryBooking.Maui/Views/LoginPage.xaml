@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryBooking.Maui.Views.LoginPage"
+             BackgroundColor="#F5F0EB">
+    <ContentPage.Content>
+        <VerticalStackLayout
+            Padding="32"
+            Spacing="16">
+            <Image
+                Source="laundrypic2.png"
+                HeightRequest="200"
+                Aspect="AspectFill">
+            </Image>
+            <Label
+                Text="Välkommen"
+                FontSize="28"
+                FontFamily="OpenSansSemibold"
+                TextColor="#3D6B68">
+            </Label>
+            
+            <!-- En picker där man väljer förening -->
+            <Label
+                Text="Bostadsrättsförening"
+                TextColor="#3D6B68"
+                FontSize="17"
+                FontFamily="OpenSansSemibold">
+            </Label>
+            <Picker
+                Title="Välj förening"
+                BackgroundColor="#D4C9BC"
+                TextColor="Black"
+                FontSize="15"
+                TitleColor="Grey"
+                ItemsSource="{Binding HousingCooperatives}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedHousingCooperative}">
+            </Picker>
+            
+            <!-- Entry för lägenhetsnummer -->
+            <Label
+                Text="Lägenhetsnummer"
+                TextColor="#3D6B68"
+                FontSize="17"
+                FontFamily="OpenSansSemibold">
+            </Label>
+            <Entry
+                Placeholder="T.ex. 1302"
+                TextColor="Black"
+                FontSize="15"
+                Text="{Binding ApartmentNumber}"
+                BackgroundColor="#D4C9BC">
+            </Entry>
+            <Button
+                Text="Logga in med Google"
+                BackgroundColor="#3D6B68"
+                TextColor="White"
+                CornerRadius="16"
+                HeightRequest="60"
+                FontFamily="OpenSansSemibold"
+                Command="{Binding LoginCommand}">
+            </Button>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

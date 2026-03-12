@@ -14,9 +14,9 @@ namespace LaundryBooking.Infrastructure.Repositories
             _bookings = context.Bookings;
         }
 
-        public async Task<List<Booking>> GetBookingsByDateAsync(DateOnly date)
+        public async Task<List<Booking>> GetBookingsByDateAsync(DateOnly date, string housingCooperativeId)
         {
-            var booking = await _bookings.Find(b => b.Date == date).ToListAsync();
+            var booking = await _bookings.Find(b => b.Date == date && b.HousingCooperativeId == housingCooperativeId).ToListAsync();
             return booking;
         }
 

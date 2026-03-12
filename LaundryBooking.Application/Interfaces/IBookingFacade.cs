@@ -5,6 +5,6 @@ namespace LaundryBooking.Application.Interfaces;
 
 public interface IBookingFacade
 {
-    Task<List<TimeSlot>> GetAvailableTimeSlotsAsync(DateOnly date);
+    Task<List<TimeSlot>> GetAvailableTimeSlotsAsync(DateOnly date, string housingCooperativeId);
     Task<bool> CreateBookingAsync(Booking booking);
 }

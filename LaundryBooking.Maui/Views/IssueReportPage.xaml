@@ -5,10 +5,19 @@
              x:Class="LaundryBooking.Maui.Views.IssueReportPage"
              BackgroundColor="#F5F0EB">
     <VerticalStackLayout>
-        <Image
-            Source="laundrypic2.png"
-            Aspect="AspectFill"
-            HeightRequest="350"/>
+        <Grid>
+            <Image
+                Source="laundrypic2.png"
+                Aspect="AspectFill"
+                HeightRequest="350"/>
+            <Label
+                Text="TvättBokaren"
+                TextColor="White"
+                FontSize="28"
+                FontFamily="OpenSansSemibold"
+                Padding="16"
+                VerticalOptions="Start"/>
+        </Grid>
         <Label
             Padding="16,8"
             Text="Ny felanmälan"

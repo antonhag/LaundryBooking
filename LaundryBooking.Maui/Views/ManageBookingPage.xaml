@@ -11,6 +11,13 @@
                     Source="laundrypic2.png"
                     Aspect="AspectFill"
                     HeightRequest="350"/>
+                <Label
+                    Text="TvättBokaren"
+                    TextColor="White"
+                    FontSize="28"
+                    FontFamily="OpenSansSemibold"
+                    Padding="16"
+                    VerticalOptions="Start"/>
             </Grid>
             <Label
                 Text="Hantera bokningar"

@@ -16,14 +16,19 @@
                     Padding="16"
                     VerticalOptions="Start">
                     <Label
+                        Text="TvättBokaren"
+                        TextColor="White"
+                        FontSize="28"
+                        FontFamily="OpenSansSemibold"/>
+                    <Label
                         Text="Välkommen"
                         TextColor="White"
-                        FontSize="22"
+                        FontSize="20"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding GivenName}"
                         TextColor="White"
-                        FontSize="16"/>
+                        FontSize="20"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout
                     Padding="16"
@@ -145,11 +150,22 @@
                                         TextColor="#2C2C2C"
                                     ></Label>
                                 </VerticalStackLayout>
-                                
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                     </CollectionView>
+                <Button
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Text="Logga ut"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="17"
+                    BackgroundColor="#B5673A"
+                    TextColor="White"
+                    CornerRadius="16"
+                    HeightRequest="60"
+                    Clicked="OnClickedLogout"/>
             </Grid>
         </VerticalStackLayout>
     </ContentPage.Content>

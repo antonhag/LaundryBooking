@@ -54,6 +54,12 @@ public class LoginViewModel : INotifyPropertyChanged
         }
     }
 
+    public void Reset()
+    {
+        ApartmentNumber = string.Empty;
+        SelectedHousingCooperative = null;
+    }
+
     private void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

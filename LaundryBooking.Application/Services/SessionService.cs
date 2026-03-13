@@ -32,6 +32,7 @@ namespace LaundryBooking.Application.Services
             ApartmentNumber = string.Empty;
             HousingCooperativeId = string.Empty;
             GivenName = string.Empty;
+            AccessToken = string.Empty;
         }
     }
 }

@@ -2,13 +2,67 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LaundryBooking.Maui.Views.NewsPage">
+             x:Class="LaundryBooking.Maui.Views.NewsPage"
+             BackgroundColor="#F5F0EB">
     <ContentPage.Content>
         <VerticalStackLayout>
-            <Image
-                Source="laundrypic2.png"
-                Aspect="AspectFill"
-                HeightRequest="250"/>
+            <Grid>
+                <Image
+                    Source="laundrypic2.png"
+                    Aspect="AspectFill"
+                    HeightRequest="350"/>
+                <Label
+                    Text="TvättBokaren"
+                    TextColor="White"
+                    FontSize="28"
+                    FontFamily="OpenSansSemibold"
+                    Padding="16"
+                    VerticalOptions="Start"/>
+            </Grid>
+            <Grid
+                RowDefinitions="Auto, Auto"
+                Padding="16"
+                RowSpacing="12">
+                <Label
+                    Grid.Row="0"
+                    Text="Nyheter"
+                    FontSize="24"
+                    FontFamily="OpenSansSemibold"
+                    TextColor="#3D6B68"/>
+                <CollectionView
+                    Grid.Row="1"
+                    ItemsSource="{Binding NewsPosts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                BackgroundColor="#E8E0D5"
+                                StrokeShape="RoundRectangle 12"
+                                Padding="16"
+                                Margin="0,4">
+                                <VerticalStackLayout>
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="{Binding Title}"
+                                            FontFamily="OpenSansSemibold"
+                                            FontSize="17"
+                                            TextColor="#2C2C2C"/>
+                                        <Label
+                                            Grid.Column="1"
+                                            Text="{Binding CreatedAt}"
+                                            FontSize="13"
+                                            TextColor="#2C2C2C"/>
+                                    </Grid>
+                                    <Label
+                                        Text="{Binding Content}"
+                                        FontSize="14"
+                                        TextColor="#2C2C2C"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
             
             
             

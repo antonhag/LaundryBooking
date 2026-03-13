@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LaundryBooking.Maui.Views.NewsPage"
-             BackgroundColor="#F5F0EB">
+             BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}">
     <ContentPage.Content>
         <VerticalStackLayout>
             <Grid>
@@ -35,7 +35,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border
-                                BackgroundColor="#E8E0D5"
+                                BackgroundColor="{AppThemeBinding Light=#E8E0D5, Dark=#2C2C2C}"
                                 StrokeShape="RoundRectangle 12"
                                 Padding="16"
                                 Margin="0,4">
@@ -46,38 +46,23 @@
                                             Text="{Binding Title}"
                                             FontFamily="OpenSansSemibold"
                                             FontSize="17"
-                                            TextColor="#2C2C2C"/>
+                                            TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"/>
                                         <Label
                                             Grid.Column="1"
                                             Text="{Binding CreatedAt}"
                                             FontSize="13"
-                                            TextColor="#2C2C2C"/>
+                                            TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"/>
                                     </Grid>
                                     <Label
                                         Text="{Binding Content}"
                                         FontSize="14"
-                                        TextColor="#2C2C2C"/>
+                                        TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"/>
                                 </VerticalStackLayout>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Grid>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

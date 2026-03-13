@@ -76,21 +76,19 @@ public class GoogleCalendarManager
         }
     }
 
-    public static async Task<bool> DeleteCalendarEvent(string accessToken, string eventId)
+    public static async Task DeleteCalendarEvent(string accessToken, string eventId)
     {
         var client = new HttpClient();
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         try
         {
-            using HttpResponseMessage response = await client.DeleteAsync(
+            await client.DeleteAsync(
                 $"https://www.googleapis.com/calendar/v3/calendars/primary/events/{eventId}");
-
-            return response.IsSuccessStatusCode;
         }
         catch (Exception)
         {
-            return false;
+            //
         }
     }
 }

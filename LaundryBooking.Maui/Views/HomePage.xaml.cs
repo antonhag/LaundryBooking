@@ -1,5 +1,6 @@
 using LaundryBooking.Application.Services;
 using LaundryBooking.Maui.ViewModels;
+using Microsoft.Maui;
 
 namespace LaundryBooking.Maui.Views;
 
@@ -14,26 +15,37 @@ public partial class HomePage : ContentPage
         BindingContext = homeViewModel;
         _sessionService = sessionService;
     }
-
+    
     private async void OnClickedGoToBookingPage(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(BookingPage));  
+        await Shell.Current.GoToAsync(nameof(BookingPage));
     }
     
     private async void OnClickedGoToManageBookingPage(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(ManageBookingPage));                                                                    
-
+        await Shell.Current.GoToAsync(nameof(ManageBookingPage));
     }
-
+    
     private async void OnClickedGoToIssueReportPage(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(IssueReportPage));   
+        await Shell.Current.GoToAsync(nameof(IssueReportPage));
     }
 
     private async void OnClickedGoToNewsPage(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(NewsPage));
+    }
+
+    private void OnClickedToggleTheme(object? sender, EventArgs e)
+    {
+        var app = Microsoft.Maui.Controls.Application.Current; // Globala app instansen
+        if (app == null)
+        {
+            return;
+        }
+
+        bool isDarkMode = app.UserAppTheme == AppTheme.Dark;
+        app.UserAppTheme = isDarkMode ? AppTheme.Light : AppTheme.Dark;
     }
 
     private async void OnClickedLogout(object? sender, EventArgs e)

@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LaundryBooking.Maui.Views.ManageBookingPage"
-             BackgroundColor="#F5F0EB">
+             BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}">
     <ContentPage.Content>
         <VerticalStackLayout>
             <Grid>
@@ -26,26 +26,26 @@
                 FontFamily="OpenSansSemibold"
                 TextColor="#3D6B68"
                 Padding="16,8"/>
-            <CollectionView                                                                                                                
-                ItemsSource="{Binding Bookings}"                                                                                           
-                Margin="16,0">                                                                                                             
-                <CollectionView.ItemTemplate>                                                                                              
-                    <DataTemplate>                                                                                                         
-                        <Border                                                                                                            
-                            BackgroundColor="#D4C9BC"                                                                                      
+            <CollectionView
+                ItemsSource="{Binding Bookings}"
+                Margin="16,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
                             StrokeShape="RoundRectangle 12"
                             Margin="0,4"
                             Padding="16">
-                            <Grid 
+                            <Grid
                                 RowDefinitions="Auto, Auto">
                                 <VerticalStackLayout Grid.Row="0">
                                     <Label
                                         Text="{Binding Date}"
                                         FontFamily="OpenSansSemibold"
-                                        TextColor="#2C2C2C"/>
+                                        TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"/>
                                     <Label
                                         Text="{Binding TimeSlotDisplayText}"
-                                        TextColor="#2C2C2C"/>
+                                        TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"/>
                                 </VerticalStackLayout>
                                 <Button
                                     Grid.Row="0"
@@ -56,7 +56,7 @@
                                     VerticalOptions="Start"
                                     HorizontalOptions="End"
                                     Clicked="OnClickedDeleteBooking"
-                                    CommandParameter="{Binding .}"/> <!-- "." gör så att hela booking skickas med som parameter till OnClickedDeleteBooking -->
+                                    CommandParameter="{Binding .}"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

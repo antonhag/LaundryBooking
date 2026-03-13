@@ -5,8 +5,8 @@
              xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              x:Class="LaundryBooking.Maui.Views.BookingPage"
-             BackgroundColor="#F5F0EB">
-    
+             BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}">
+
     <VerticalStackLayout>
         <Grid>
             <Image
@@ -29,30 +29,35 @@
             FontFamily="OpenSansSemibold">
         </Label>
         <cal:Calendar
+            Culture="{Binding CurrentCulture}"
             SelectedDate="{Binding SelectedDate}"
-            MinimumDate="{x:Static sys:DateTime.Today}"                                                                      
-            BackgroundColor="#F5F0EB"
+            MinimumDate="{x:Static sys:DateTime.Today}"
+            FirstDayOfWeek="Monday"
+            BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}"
+            DisabledDayColor="{AppThemeBinding Light=#B0A898, Dark=#555555}"
+            DeselectedDayTextColor="{AppThemeBinding Light=Black, Dark=White}"
+            WeekendDayColor="{AppThemeBinding Light=Black, Dark=White}"
             SelectedDayBackgroundColor="#3D6B68"
             SelectedDayTextColor="White"
             OtherMonthDayColor="#B0A898"
             TodayOutlineColor="#3D6B68"
             TodayTextColor="#3D6B68"/>
-        <CollectionView                                                                                                                
-            ItemsSource="{Binding AvailableTimeSlots}"                                                                                 
-            SelectedItem="{Binding SelectedTimeSlot}" 
+        <CollectionView
+            ItemsSource="{Binding AvailableTimeSlots}"
+            SelectedItem="{Binding SelectedTimeSlot}"
             SelectionMode="Single"
             Margin="16,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border 
-                        BackgroundColor="{Binding BackgroundColor}" 
-                        StrokeShape="RoundRectangle 12" 
-                        Margin="0,4" 
+                    <Border
+                        BackgroundColor="{Binding BackgroundColor}"
+                        StrokeShape="RoundRectangle 12"
+                        Margin="0,4"
                         Padding="16">
-                        <Label 
-                            Text="{Binding DisplayText}" 
+                        <Label
+                            Text="{Binding DisplayText}"
                             HorizontalTextAlignment="Center"
-                            TextColor="White" 
+                            TextColor="White"
                             FontFamily="OpenSansSemibold"/>
                     </Border>
                 </DataTemplate>

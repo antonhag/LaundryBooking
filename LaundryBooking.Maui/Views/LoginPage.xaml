@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LaundryBooking.Maui.Views.LoginPage"
-             BackgroundColor="#F5F0EB">
+             BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}">
     <ContentPage.Content>
         <VerticalStackLayout
             Padding="32"
@@ -19,7 +19,7 @@
                 FontFamily="OpenSansSemibold"
                 TextColor="#3D6B68">
             </Label>
-            
+
             <!-- En picker där man väljer förening -->
             <Label
                 Text="Bostadsrättsförening"
@@ -29,15 +29,15 @@
             </Label>
             <Picker
                 Title="Välj förening"
-                BackgroundColor="#D4C9BC"
-                TextColor="Black"
+                BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                TextColor="{AppThemeBinding Light=Black, Dark=White}"
                 FontSize="15"
-                TitleColor="Grey"
+                TitleColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}"
                 ItemsSource="{Binding HousingCooperatives}"
                 ItemDisplayBinding="{Binding Name}"
                 SelectedItem="{Binding SelectedHousingCooperative}">
             </Picker>
-            
+
             <!-- Entry för lägenhetsnummer -->
             <Label
                 Text="Lägenhetsnummer"
@@ -47,10 +47,10 @@
             </Label>
             <Entry
                 Placeholder="T.ex. 1302"
-                TextColor="Black"
+                TextColor="{AppThemeBinding Light=Black, Dark=White}"
                 FontSize="15"
                 Text="{Binding ApartmentNumber}"
-                BackgroundColor="#D4C9BC">
+                BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}">
             </Entry>
             <Button
                 Text="Logga in med Google"

@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LaundryBooking.Maui.Views.IssueReportPage"
-             BackgroundColor="#F5F0EB">
+             BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}">
     <VerticalStackLayout>
         <Grid>
             <Image
@@ -42,11 +42,12 @@
                 Grid.Row="1"
                 Text="{Binding Title}"
                 HeightRequest="50"
-                BackgroundColor="#D4C9BC"
-                TextColor="Black"
+                BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                TextColor="{AppThemeBinding Light=Black, Dark=White}"
                 FontSize="17"
                 FontFamily="OpenSansSemibold"
-                Placeholder="Skriv en kort rubrik om ärendet">
+                Placeholder="Skriv en kort rubrik om ärendet"
+                PlaceholderColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}"    >
             </Entry>
             <Label
                 Grid.Row="2"
@@ -55,12 +56,13 @@
                 FontSize="20"
                 FontFamily="OpenSansSemibold">
             </Label>
-            <Editor                                                                                                            
-                Grid.Row="3"         
+            <Editor
+                Grid.Row="3"
                 Text="{Binding Description}"
-                BackgroundColor="#D4C9BC"     
-                TextColor="Black"
+                BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                TextColor="{AppThemeBinding Light=Black, Dark=White}"
                 Placeholder="Skriv en beskrivning om ärendet"
+                PlaceholderColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}"    
                 HeightRequest="120"
                 FontSize="17"
                 FontFamily="OpenSansSemibold"
@@ -75,7 +77,6 @@
                 HeightRequest="60"
                 Margin="0,8,0,0"
                 Command="{Binding CreateIssueReportCommand}"/>
-            
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

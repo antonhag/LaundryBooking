@@ -71,6 +71,8 @@ public class BookingViewModel : INotifyPropertyChanged
         }
     }
 
+    public System.Globalization.CultureInfo CurrentCulture { get; } = new("sv-SE");
+
     private static readonly Color ActiveColor = Color.FromArgb("#B5673A");
     private static readonly Color InactiveColor = Color.FromArgb("#B0A898");
 

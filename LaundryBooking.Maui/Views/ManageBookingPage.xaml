@@ -10,7 +10,7 @@
                 <Image
                     Source="laundrypic2.png"
                     Aspect="AspectFill"
-                    HeightRequest="250"/>
+                    HeightRequest="350"/>
             </Grid>
             <Label
                 Text="Hantera bokningar"
@@ -28,8 +28,7 @@
                             BackgroundColor="#D4C9BC"                                                                                      
                             StrokeShape="RoundRectangle 12"
                             Margin="0,4"
-                            Padding="16"
-                            >
+                            Padding="16">
                             <Grid 
                                 RowDefinitions="Auto, Auto">
                                 <VerticalStackLayout Grid.Row="0">

@@ -11,7 +11,14 @@
         <Image
             Source="laundrypic2.png"
             Aspect="AspectFill"
-            HeightRequest="250"/>
+            HeightRequest="350"/>
+        <Label
+            Padding="16,8"
+            Text="Boka tvättid"
+            TextColor="#3D6B68"
+            FontSize="24"
+            FontFamily="OpenSansSemibold">
+        </Label>
         <cal:Calendar
             SelectedDate="{Binding SelectedDate}"
             MinimumDate="{x:Static sys:DateTime.Today}"                                                                      

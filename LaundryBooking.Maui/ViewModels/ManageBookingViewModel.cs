@@ -4,6 +4,7 @@ using LaundryBooking.Application.Interfaces;
 using LaundryBooking.Application.Services;
 using LaundryBooking.Domain.Entities;
 using LaundryBooking.Domain.Interfaces;
+using LaundryBooking.Maui.DataManager;
 
 namespace LaundryBooking.Maui.ViewModels;
 
@@ -50,7 +51,13 @@ public class ManageBookingViewModel : INotifyPropertyChanged
         {
             return;
         }
+        
         await _bookingService.DeleteBookingAsync(booking.Id);
         Bookings.Remove(booking);
+
+        if (!string.IsNullOrEmpty(booking.CalendarEventId))
+        {
+            await GoogleCalendarManager.DeleteCalendarEvent(_sessionService.AccessToken, booking.CalendarEventId);
+        }
     }
 }

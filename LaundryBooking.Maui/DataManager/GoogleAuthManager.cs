@@ -5,8 +5,8 @@ namespace LaundryBooking.Maui.DataManager;
 
 public class GoogleAuthManager
 {
-    // Byter ut authorization code mot en access token och hämtar användarens förnamn
-    public static async Task<string> GetGivenNameAsync(string code, string codeVerifier, string clientId)
+    // Byter ut authorization code mot en access token och hämtar användarens profilinfo
+    public static async Task<(string, string)> GetUserInfoAsync(string code, string codeVerifier, string clientId)
     {
         var client = new HttpClient();
 
@@ -27,7 +27,7 @@ public class GoogleAuthManager
 
         if (!tokenResponse.IsSuccessStatusCode)
         {
-            return string.Empty;
+            return (string.Empty, String.Empty);
         }
 
         var tokenData = JsonSerializer.Deserialize<JsonElement>(tokenJson);
@@ -42,6 +42,6 @@ public class GoogleAuthManager
         string userInfoJson = await userInfoResponse.Content.ReadAsStringAsync();
         var userInfo = JsonSerializer.Deserialize<JsonElement>(userInfoJson);
 
-        return userInfo.GetProperty("given_name").GetString() ?? string.Empty;
+        return (userInfo.GetProperty("given_name").GetString() ?? string.Empty, accessToken);                                                
     }
 }

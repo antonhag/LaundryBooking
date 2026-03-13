@@ -5,6 +5,7 @@ using LaundryBooking.Application.Interfaces;
 using LaundryBooking.Application.Services;
 using LaundryBooking.Domain.Entities;
 using LaundryBooking.Domain.Enums;
+using LaundryBooking.Maui.DataManager;
 
 namespace LaundryBooking.Maui.ViewModels;
 
@@ -164,13 +165,17 @@ public class BookingViewModel : INotifyPropertyChanged
             Date = date,
             TimeSlot = SelectedTimeSlot.TimeSlot
         };
+        
+        // Skapa kalenderhändelsen först så att eventId sparas med bokningen i databasen
+        newBooking.CalendarEventId = await GoogleCalendarManager.CreateCalendarEvent(
+            _sessionService.AccessToken, date, SelectedTimeSlot.TimeSlot) ?? string.Empty;
 
         var success = await _bookingFacade.CreateBookingAsync(newBooking); // Facade validerar och skapar bokningen
 
         if (success)
         {
+            await Shell.Current.DisplayAlertAsync("Klart", "Bokningen är skapad och tillagd i din Google kalender!", "OK");
             SelectedTimeSlot = null; // Nollställ val så knappen blir grå
-            await Shell.Current.DisplayAlertAsync("Klart", "Bokningen är skapad!", "OK");
             LoadAvailableTimeSlotsAsync(); // Ladda om så den bokade slotten visas som upptagen
         }
         else

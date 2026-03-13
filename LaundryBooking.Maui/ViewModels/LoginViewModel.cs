@@ -111,7 +111,7 @@ public class LoginViewModel : INotifyPropertyChanged
                 $"?client_id={_googleAuthSettings.ClientId}" +
                 $"&redirect_uri=com.companyname.laundrybooking.maui://" +
                 $"&response_type=code" +
-                $"&scope=email%20profile" +
+                $"&scope=email%20profile%20https://www.googleapis.com/auth/calendar.events" +
                 $"&code_challenge={codeChallenge}" +
                 $"&code_challenge_method=S256");
 
@@ -122,10 +122,10 @@ public class LoginViewModel : INotifyPropertyChanged
                     authUrl, new Uri("com.companyname.laundrybooking.maui://"));
 
             // Byter ut authorization code mot en access token och hämtar förnamnet via GoogleAuthManager
-            var givenName = await GoogleAuthManager.GetGivenNameAsync(
+            var (givenName, accessToken) = await GoogleAuthManager.GetUserInfoAsync(
                 result.Properties["code"], codeVerifier, _googleAuthSettings.ClientId);
 
-            _sessionService.SetSession(ApartmentNumber, SelectedHousingCooperative.Id, givenName);
+            _sessionService.SetSession(ApartmentNumber, SelectedHousingCooperative.Id, givenName, accessToken);
             await Shell.Current.GoToAsync(nameof(HomePage));
         }
         catch (TaskCanceledException)

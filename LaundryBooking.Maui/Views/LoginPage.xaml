@@ -10,7 +10,7 @@
             Spacing="16">
             <Image
                 Source="laundrypic2.png"
-                HeightRequest="200"
+                HeightRequest="250"
                 Aspect="AspectFill">
             </Image>
             <Label

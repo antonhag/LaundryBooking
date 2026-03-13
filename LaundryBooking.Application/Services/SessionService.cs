@@ -13,16 +13,18 @@ namespace LaundryBooking.Application.Services
         public string ApartmentNumber { get; private set; } = string.Empty;
         public string HousingCooperativeId { get; private set; } = string.Empty;
         public string GivenName { get; private set; } = string.Empty;
+        public string AccessToken { get; private set; } = string.Empty;
         
         private SessionService()
         {
         }
 
-        public void SetSession(string apartmentNumber, string housingCooperativeId, string givenName = "")
+        public void SetSession(string apartmentNumber, string housingCooperativeId, string givenName = "", string accessToken = "")
         {
             ApartmentNumber = apartmentNumber;
             HousingCooperativeId = housingCooperativeId;
             GivenName = givenName;
+            AccessToken = accessToken;
         }
 
         public void ClearSession()

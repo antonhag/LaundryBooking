@@ -8,7 +8,7 @@
         <Image
             Source="laundrypic2.png"
             Aspect="AspectFill"
-            HeightRequest="300"/>
+            HeightRequest="350"/>
         <Label
             Padding="16,8"
             Text="Ny felanmälan"

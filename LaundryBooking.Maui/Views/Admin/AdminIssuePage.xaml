@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryBooking.Maui.Views.Admin.AdminIssuePage"
+             x:Name="IssuesPage"
+             BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}">
+    <ContentPage.Content>
+        <Grid
+            RowDefinitions="Auto, Auto, *">
+            <Grid Grid.Row="0">
+                <Image
+                    Source="laundrypic2.png"
+                    Aspect="AspectFill"
+                    HeightRequest="350">
+                </Image>
+                <VerticalStackLayout
+                    Padding="16"
+                    VerticalOptions="Start">
+                    <Label
+                        Text="TvättBokaren"
+                        TextColor="White"
+                        FontSize="21"
+                        FontFamily="OpenSansSemibold">
+                    </Label>
+                    <Label
+                        Text="Admin"
+                        TextColor="White"
+                        FontSize="18"
+                        FontAttributes="Bold">
+                    </Label>
+                </VerticalStackLayout>
+            </Grid>
+            <Label
+                Grid.Row="1"
+                Text="Hantera felanmälningar"
+                Padding="16,12,16,0"
+                FontSize="24"
+                FontFamily="OpenSansSemibold"
+                TextColor="#3D6B68">
+            </Label>
+            <CollectionView
+                Grid.Row="2"
+                ItemsSource="{Binding IssueReports}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            BackgroundColor="{AppThemeBinding Light=#E8E0D5, Dark=#2C2C2C}"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="16"
+                            Margin="16,10">
+                            <Grid
+                                ColumnDefinitions="*, Auto"
+                                ColumnSpacing="8">
+                                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                    <Label
+                                        Text="{Binding Title}"
+                                        FontSize="17"
+                                        FontFamily="OpenSansSemibold"
+                                        TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}">
+                                    </Label>
+                                    <Grid 
+                                        ColumnDefinitions="Auto, *, Auto">
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="{Binding HousingCooperativeName}"
+                                            FontSize="13"
+                                            FontFamily="OpenSansSemibold"
+                                            TextColor="#3D6B68">
+                                        </Label>
+                                        <Label
+                                            Grid.Column="2"
+                                            Text="{Binding ApartmentNumber, StringFormat='Lgh. {0}'}"
+                                            FontSize="13"
+                                            TextColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}">
+                                        </Label>
+                                    </Grid>
+                                    <Label
+                                        Text="{Binding Description}"
+                                        FontSize="15"
+                                        TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"
+                                        MaxLines="2"
+                                        LineBreakMode="TailTruncation">
+                                    </Label>
+                                    <Picker
+                                        ItemsSource="{Binding Source={x:Reference IssuesPage}, Path=BindingContext.StatusOptions}"
+                                        SelectedItem="{Binding StatusDisplay}"
+                                        SelectedIndexChanged="OnStatusChanged"
+                                        BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                                        TextColor="{AppThemeBinding Light=Black, Dark=White}">
+                                    </Picker>
+                                </VerticalStackLayout>
+                                <Button
+                                    Grid.Column="1"
+                                    Text="Ta bort"
+                                    BackgroundColor="#B5673A"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    HeightRequest="40"
+                                    VerticalOptions="Center"
+                                    Clicked="OnDeleteClicked">
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

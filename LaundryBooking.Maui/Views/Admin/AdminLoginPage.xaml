@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryBooking.Maui.Views.Admin.AdminLoginPage"
+             BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}">
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <Grid>
+                <Image
+                    Source="laundrypic2.png"
+                    Aspect="AspectFill"
+                    HeightRequest="350" />
+                <VerticalStackLayout
+                    Padding="16"
+                    VerticalOptions="Start">
+                    <Label
+                        Text="TvättBokaren"
+                        TextColor="White"
+                        FontSize="21"
+                        FontFamily="OpenSansSemibold" />
+                    <Label
+                        Text="Admin"
+                        TextColor="White"
+                        FontSize="18"
+                        FontAttributes="Bold" />
+                </VerticalStackLayout>
+            </Grid>
+            <Grid
+                RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+                Padding="16"
+                RowSpacing="12">
+                <Label
+                    Grid.Row="0"
+                    Text="Användarnamn"
+                    TextColor="#3D6B68"
+                    FontSize="20"
+                    FontFamily="OpenSansSemibold">
+                </Label>
+                <Entry
+                    Grid.Row="1"
+                    Text="{Binding Username}"
+                    HeightRequest="50"
+                    BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                    FontSize="15"
+                    FontFamily="OpenSansSemibold"
+                    Placeholder="Skriv in ditt användarnamn"
+                    PlaceholderColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}">
+                </Entry>
+                <Label
+                    Grid.Row="2"
+                    Text="Lösenord"
+                    TextColor="#3D6B68"
+                    FontSize="20"
+                    FontFamily="OpenSansSemibold">
+                </Label>
+                <Entry
+                    Grid.Row="3"
+                    Text="{Binding Password}"
+                    IsPassword="True"
+                    HeightRequest="50"
+                    BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                    FontSize="15"
+                    FontFamily="OpenSansSemibold"
+                    Placeholder="Skriv in ditt lösenord"
+                    PlaceholderColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}">
+                </Entry>
+                <Button
+                    Grid.Row="4"
+                    Text="Logga in"
+                    BackgroundColor="#3D6B68"
+                    TextColor="White"
+                    CornerRadius="16"
+                    HeightRequest="60"
+                    FontFamily="OpenSansSemibold"
+                    Command="{Binding LoginCommand}">
+                </Button>
+            </Grid>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

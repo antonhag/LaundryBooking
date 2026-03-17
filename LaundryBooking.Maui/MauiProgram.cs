@@ -6,7 +6,9 @@ using LaundryBooking.Domain.Interfaces;
 using LaundryBooking.Infrastructure.Data;
 using LaundryBooking.Infrastructure.Repositories;
 using LaundryBooking.Maui.ViewModels;
+using LaundryBooking.Maui.ViewModels.Admin;
 using LaundryBooking.Maui.Views;
+using LaundryBooking.Maui.Views.Admin;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -62,7 +64,12 @@ public static class MauiProgram
         builder.Services.AddTransient<ManageBookingPage>();                                                                            
         builder.Services.AddTransient<IssueReportPage>();
         builder.Services.AddTransient<NewsPage>();      
-        builder.Services.AddTransient<LoginPage>();                                                                                   
+        builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddTransient<AdminLoginPage>();
+        builder.Services.AddTransient<AdminHomePage>();
+        builder.Services.AddTransient<AdminIssuePage>();
+        builder.Services.AddTransient<AdminNewsPage>();
+        builder.Services.AddTransient<AdminHousingPage>();
         
         // Registrera viewmodels                                                                                                      
         builder.Services.AddTransient<BookingViewModel>();
@@ -71,6 +78,11 @@ public static class MauiProgram
         builder.Services.AddTransient<HomeViewModel>();
         builder.Services.AddTransient<NewsViewModel>();
         builder.Services.AddTransient<LoginViewModel>();
+        builder.Services.AddTransient<AdminLoginViewModel>();
+        builder.Services.AddTransient<AdminHomeViewModel>();
+        builder.Services.AddTransient<AdminIssueViewModel>();
+        builder.Services.AddTransient<AdminNewsViewModel>();
+        builder.Services.AddTransient<AdminHousingViewModel>();
 
 
         return builder.Build();

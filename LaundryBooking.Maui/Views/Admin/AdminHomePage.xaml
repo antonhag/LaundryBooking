@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryBooking.Maui.Views.Admin.AdminHomePage"
+             BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*, Auto">
+            <VerticalStackLayout Grid.Row="0">
+                <Grid>
+                    <Image
+                        Source="laundrypic2.png"
+                        Aspect="AspectFill"
+                        HeightRequest="350"/>
+                    <VerticalStackLayout
+                        Padding="16"
+                        VerticalOptions="Start">
+                        <Label
+                            Text="TvättBokaren"
+                            TextColor="White"
+                            FontSize="21"
+                            FontFamily="OpenSansSemibold"/>
+                        <Label
+                            Text="Admin"
+                            TextColor="White"
+                            FontSize="18"
+                            FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </Grid>
+                <Grid
+                    RowDefinitions="Auto, Auto, Auto, Auto"
+                    ColumnDefinitions="*, *"
+                    Padding="16"
+                    RowSpacing="12"
+                    ColumnSpacing="12">
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="IDAG"
+                        TextColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}"
+                        FontSize="17"
+                        FontFamily="OpenSansSemibold"/>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="{Binding TodayDate}"
+                        TextColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}"
+                        FontSize="17"
+                        FontFamily="OpenSansSemibold"
+                        HorizontalOptions="End"/>
+                    <Button
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        HeightRequest="100"
+                        VerticalOptions="Fill"
+                        Text="Hantera felanmälningar"
+                        FontFamily="OpenSansSemibold"
+                        BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                        TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"
+                        FontSize="17"
+                        CornerRadius="16"
+                        Clicked="OnClickedGoAdminIssuePage"/>
+                    <Button
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        HeightRequest="100"
+                        VerticalOptions="Fill"
+                        Text="Hantera nyheter"
+                        FontFamily="OpenSansSemibold"
+                        BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                        TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"
+                        FontSize="17"
+                        CornerRadius="16"
+                        Clicked="OnClickedGoAdminNewsPage"/>
+                    <Button
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        HeightRequest="100"
+                        VerticalOptions="Fill"
+                        Text="Hantera bostadsrättsföreningar"
+                        FontFamily="OpenSansSemibold"
+                        BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                        TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"
+                        FontSize="17"
+                        CornerRadius="16"
+                        Clicked="OnClickedGoAdminHousingPage"/>
+                </Grid>
+            </VerticalStackLayout>
+            <Grid
+                Grid.Row="1"
+                ColumnDefinitions="*, *"
+                Padding="16"
+                ColumnSpacing="12">
+                <Button
+                    Grid.Column="0"
+                    Text="Mörkt läge"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="17"
+                    BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                    TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"
+                    CornerRadius="16"
+                    HeightRequest="60"
+                    Clicked="OnClickedToggleTheme"/>
+                <Button
+                    Grid.Column="1"
+                    Text="Logga ut"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="17"
+                    BackgroundColor="#B5673A"
+                    TextColor="White"
+                    CornerRadius="16"
+                    HeightRequest="60"
+                    Clicked="OnClickedLogout"/>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

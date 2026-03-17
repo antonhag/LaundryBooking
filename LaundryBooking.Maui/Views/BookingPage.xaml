@@ -16,7 +16,7 @@
             <Label
                 Text="TvättBokaren"
                 TextColor="White"
-                FontSize="28"
+                FontSize="21"
                 FontFamily="OpenSansSemibold"
                 Padding="16"
                 VerticalOptions="Start"/>

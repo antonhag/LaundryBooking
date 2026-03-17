@@ -5,62 +5,99 @@
              x:Class="LaundryBooking.Maui.Views.LoginPage"
              BackgroundColor="{AppThemeBinding Light=#F5F0EB, Dark=#1C1C1E}">
     <ContentPage.Content>
-        <VerticalStackLayout
-            Padding="32"
-            Spacing="16">
-            <Image
-                Source="laundrypic2.png"
-                HeightRequest="250"
-                Aspect="AspectFill">
-            </Image>
-            <Label
-                Text="Välkommen"
-                FontSize="28"
-                FontFamily="OpenSansSemibold"
-                TextColor="#3D6B68">
-            </Label>
+        <Grid RowDefinitions="*, Auto" ColumnDefinitions="*, *">
+            <VerticalStackLayout
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Spacing="16">
+                <Grid>
+                    <Image
+                        Source="laundrypic2.png"
+                        Aspect="AspectFill"
+                        HeightRequest="350"/>
+                    <VerticalStackLayout
+                        Padding="16"
+                        VerticalOptions="Start">
+                        <Label
+                            Text="TvättBokaren"
+                            TextColor="White"
+                            FontSize="21"
+                            FontFamily="OpenSansSemibold"/>
+                    </VerticalStackLayout>
+                </Grid>
+                <VerticalStackLayout Spacing="16" Padding="32,0,32,0">
+                    <Label
+                        Text="Välkommen"
+                        FontSize="28"
+                        FontFamily="OpenSansSemibold"
+                        TextColor="#3D6B68"/>
 
-            <!-- En picker där man väljer förening -->
-            <Label
-                Text="Bostadsrättsförening"
-                TextColor="#3D6B68"
-                FontSize="17"
-                FontFamily="OpenSansSemibold">
-            </Label>
-            <Picker
-                Title="Välj förening"
-                BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
-                TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                FontSize="15"
-                TitleColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}"
-                ItemsSource="{Binding HousingCooperatives}"
-                ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedHousingCooperative}">
-            </Picker>
+                    <!-- En picker där man väljer förening -->
+                    <Label
+                        Text="Bostadsrättsförening"
+                        TextColor="#3D6B68"
+                        FontSize="20"
+                        FontFamily="OpenSansSemibold"/>
+                    <Picker
+                        Title="Välj förening"
+                        BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                        TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                        FontSize="15"
+                        TitleColor="{AppThemeBinding Light=Grey, Dark=#8E8E93}"
+                        ItemsSource="{Binding HousingCooperatives}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedHousingCooperative}"/>
 
-            <!-- Entry för lägenhetsnummer -->
-            <Label
-                Text="Lägenhetsnummer"
-                TextColor="#3D6B68"
-                FontSize="17"
-                FontFamily="OpenSansSemibold">
-            </Label>
-            <Entry
-                Placeholder="T.ex. 1302"
-                TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                FontSize="15"
-                Text="{Binding ApartmentNumber}"
-                BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}">
-            </Entry>
-            <Button
-                Text="Logga in med Google"
-                BackgroundColor="#3D6B68"
-                TextColor="White"
-                CornerRadius="16"
-                HeightRequest="60"
-                FontFamily="OpenSansSemibold"
-                Command="{Binding LoginCommand}">
-            </Button>
-        </VerticalStackLayout>
+                    <!-- Entry för lägenhetsnummer -->
+                    <Label
+                        Text="Lägenhetsnummer"
+                        TextColor="#3D6B68"
+                        FontSize="20"
+                        FontFamily="OpenSansSemibold"/>
+                    <Entry
+                        Placeholder="T.ex. 1302"
+                        TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                        FontSize="15"
+                        Text="{Binding ApartmentNumber}"
+                        BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"/>
+                    <Button
+                        Text="Logga in med Google"
+                        BackgroundColor="#3D6B68"
+                        TextColor="White"
+                        FontSize="15"
+                        CornerRadius="16"
+                        HeightRequest="60"
+                        FontFamily="OpenSansSemibold"
+                        Command="{Binding LoginCommand}"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+            <Grid
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                ColumnDefinitions="*, *"
+                Padding="16"
+                ColumnSpacing="12">
+                <Button
+                    Grid.Column="0"
+                    Text="Mörkt läge"
+                    FontSize="15"
+                    FontFamily="OpenSansSemibold"
+                    BackgroundColor="{AppThemeBinding Light=#D4C9BC, Dark=#3A3A3C}"
+                    TextColor="{AppThemeBinding Light=#2C2C2C, Dark=#EBEBEB}"
+                    CornerRadius="16"
+                    HeightRequest="60"
+                    Clicked="OnClickedToggleTheme"/>
+                <Button
+                    Grid.Column="1"
+                    Text="Logga in som admin"
+                    FontSize="15"
+                    BackgroundColor="#B5673A"
+                    TextColor="White"
+                    CornerRadius="16"
+                    HeightRequest="60"
+                    FontFamily="OpenSansSemibold"
+                    Clicked="OnClickedGoToAdminLoginPage"/>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

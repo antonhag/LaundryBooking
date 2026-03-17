@@ -93,14 +93,16 @@ public class BookingViewModel : INotifyPropertyChanged
     // Variabel som styr bokningsknappens färg, om CanBok == true är den orange annars grå
     public Color ButtonColor => CanBook ? ActiveColor : InactiveColor;
 
-    // Båda services injiceras via konstruktorn istället för att skapas här
-    private readonly IBookingFacade _bookingFacade;                                                                              
+    // Services injiceras via konstruktorn istället för att skapas här
+    private readonly IBookingFacade _bookingFacade;
+    private readonly IBookingService _bookingService;
     private readonly SessionService _sessionService;
 
     // Tar emot services via dependency injection
-    public BookingViewModel(IBookingFacade bookingFacade, SessionService sessionService)
+    public BookingViewModel(IBookingFacade bookingFacade, IBookingService bookingService, SessionService sessionService)
     {
         _bookingFacade = bookingFacade;
+        _bookingService = bookingService;
         _sessionService = sessionService;
         BookCommand = new Command(CreateBookingAsync);
     }
@@ -168,22 +170,37 @@ public class BookingViewModel : INotifyPropertyChanged
             TimeSlot = SelectedTimeSlot.TimeSlot
         };
         
-        // Skapa kalenderhändelsen först så att eventId sparas med bokningen i databasen
-        newBooking.CalendarEventId = await GoogleCalendarManager.CreateCalendarEvent(
-            _sessionService.AccessToken, date, SelectedTimeSlot.TimeSlot) ?? string.Empty;
-
-        var success = await _bookingFacade.CreateBookingAsync(newBooking); // Facade validerar och skapar bokningen
-
-        if (success)
+        try
         {
-            await Shell.Current.DisplayAlertAsync("Klart", "Bokningen är skapad och tillagd i din Google kalender!", "OK");
-            SelectedTimeSlot = null; // Nollställ val så knappen blir grå
-            LoadAvailableTimeSlotsAsync(); // Ladda om så den bokade slotten visas som upptagen
+            var success = await _bookingFacade.CreateBookingAsync(newBooking); // Facade validerar och skapar bokningen
+
+            if (success)
+            {
+                var bookedTimeSlot = SelectedTimeSlot.TimeSlot;
+                SelectedTimeSlot = null; // Nollställ val så knappen blir grå
+                try
+                {
+                    var eventId = await GoogleCalendarManager.CreateCalendarEvent(
+                        _sessionService.AccessToken, date, bookedTimeSlot) ?? string.Empty;
+                    await _bookingService.UpdateCalendarEventIdAsync(newBooking.Id, eventId);
+                    await Shell.Current.DisplayAlertAsync("Klart", "Bokningen är skapad och tillagd i din Google kalender!", "OK");
+                }
+                catch
+                {
+                    await Shell.Current.DisplayAlertAsync("Klart", "Bokningen är skapad men kunde inte läggas till i Google kalender.", "OK");
+                }
+            }
+            else
+            {
+                await Shell.Current.DisplayAlertAsync("Fel", "Tiden är redan bokad.", "OK");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            SelectedTimeSlot = null;
-            await Shell.Current.DisplayAlertAsync("Fel", "Tiden är redan bokad.", "OK");
+            await Shell.Current.DisplayAlertAsync("Fel", $"Kunde inte skapa bokning: {ex.Message}", "OK");
+        }
+        finally
+        {
             LoadAvailableTimeSlotsAsync(); // Ladda om för att synka med databasen
         }
     }

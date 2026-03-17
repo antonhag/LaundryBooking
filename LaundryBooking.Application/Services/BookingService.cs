@@ -39,6 +39,11 @@ namespace LaundryBooking.Application.Services
             return true;
         }
 
+        public async Task UpdateCalendarEventIdAsync(string id, string calendarEventId)
+        {
+            await _bookingRepository.UpdateCalendarEventIdAsync(id, calendarEventId);
+        }
+
         public async Task DeleteBookingAsync(string id)
         {
             await _bookingRepository.DeleteBookingAsync(id);

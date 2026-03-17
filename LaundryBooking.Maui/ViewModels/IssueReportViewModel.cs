@@ -67,9 +67,16 @@ public class IssueReportViewModel : INotifyPropertyChanged
             Status = IssueStatus.Open
         };
         
-        await _issueService.CreateIssueAsync(newIssueReport);
-        await Shell.Current.DisplayAlertAsync("Klart", "Felanmälan skickad!", "OK");
-        await Shell.Current.Navigation.PopAsync();                                                                           
+        try
+        {
+            await _issueService.CreateIssueAsync(newIssueReport);
+            await Shell.Current.DisplayAlertAsync("Klart", "Felanmälan skickad!", "OK");
+            await Shell.Current.Navigation.PopAsync();
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Fel", $"Kunde inte skicka felanmälan: {ex.Message}", "OK");
+        }                                                                           
     }
     
     

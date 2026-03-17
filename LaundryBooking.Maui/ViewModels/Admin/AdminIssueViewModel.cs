@@ -88,12 +88,26 @@ public class AdminIssueViewModel : INotifyPropertyChanged
 
     public async Task UpdateStatusAsync(IssueReportDisplay display)
     {
-        await _issueService.UpdateIssueStatusAsync(display.Id, display.Issue.Status);
+        try
+        {
+            await _issueService.UpdateIssueStatusAsync(display.Id, display.Issue.Status);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Fel", $"Kunde inte uppdatera status: {ex.Message}", "OK");
+        }
     }
 
     public async Task DeleteIssueAsync(IssueReportDisplay display)
     {
-        await _issueService.DeleteIssueAsync(display.Id);
-        IssueReports.Remove(display);
+        try
+        {
+            await _issueService.DeleteIssueAsync(display.Id);
+            IssueReports.Remove(display);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Fel", $"Kunde inte ta bort felanmälan: {ex.Message}", "OK");
+        }
     }
 }

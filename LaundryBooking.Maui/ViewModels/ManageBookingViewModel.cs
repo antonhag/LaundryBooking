@@ -47,17 +47,19 @@ public class ManageBookingViewModel : INotifyPropertyChanged
     
     public async Task DeleteBookingAsync(Booking? booking)
     {
-        if (booking == null)
-        {
-            return;
-        }
-        
-        await _bookingService.DeleteBookingAsync(booking.Id);
-        Bookings.Remove(booking);
+        if (booking == null) return;
 
-        if (!string.IsNullOrEmpty(booking.CalendarEventId))
+        try
         {
-            await GoogleCalendarManager.DeleteCalendarEvent(_sessionService.AccessToken, booking.CalendarEventId);
+            await _bookingService.DeleteBookingAsync(booking.Id);
+            Bookings.Remove(booking);
+
+            if (!string.IsNullOrEmpty(booking.CalendarEventId))
+                await GoogleCalendarManager.DeleteCalendarEvent(_sessionService.AccessToken, booking.CalendarEventId);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Fel", $"Kunde inte ta bort bokning: {ex.Message}", "OK");
         }
     }
 }

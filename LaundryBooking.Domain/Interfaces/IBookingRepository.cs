@@ -7,6 +7,7 @@ namespace LaundryBooking.Domain.Interfaces
         Task<List<Booking>> GetBookingsByDateAsync(DateOnly date, string housingCooperativeId);
         Task<List<Booking>> GetBookingsByApartmentAsync(string apartmentNumber);
         Task CreateBookingAsync(Booking booking);
+        Task UpdateCalendarEventIdAsync(string id, string calendarEventId);
         Task DeleteBookingAsync(string id);
     }
 }

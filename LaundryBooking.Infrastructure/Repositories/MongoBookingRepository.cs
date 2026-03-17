@@ -31,6 +31,12 @@ namespace LaundryBooking.Infrastructure.Repositories
             await _bookings.InsertOneAsync(booking);
         }
 
+        public async Task UpdateCalendarEventIdAsync(string id, string calendarEventId)
+        {
+            var update = Builders<Booking>.Update.Set(b => b.CalendarEventId, calendarEventId);
+            await _bookings.UpdateOneAsync(b => b.Id == id, update);
+        }
+
         public async Task DeleteBookingAsync(string id)
         {
             await _bookings.DeleteOneAsync(b => b.Id == id);

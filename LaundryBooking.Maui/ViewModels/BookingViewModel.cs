@@ -41,7 +41,6 @@ public class BookingViewModel : INotifyPropertyChanged
     
     // Håller det faktiska värdet för AvailableTimeSlots
     private ObservableCollection<TimeSlotOption> _availableTimeSlots = new();
-    
     // Lista med tillgängliga tider, UI uppdateras automatiskt när listan byts ut
     public ObservableCollection<TimeSlotOption> AvailableTimeSlots
     {

@@ -75,6 +75,7 @@ public class AdminIssueViewModel : INotifyPropertyChanged
     private async void LoadReports()
     {
         var reports = await _issueService.GetAllIssuesAsync();
+        reports = reports.OrderByDescending(r => r.CreatedAt).ToList();
         var cooperatives = await _cooperativeService.GetAllHousingCooperativesAsync();
 
         IssueReports.Clear();

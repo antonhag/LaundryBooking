@@ -16,6 +16,7 @@ public class HomeViewModel : INotifyPropertyChanged
 
     public string TodayDate { get; set; } = DateTime.Now.ToString("dddd d MMMM", new CultureInfo("sv-SE"));
     
+    // Read-only props, hämtar bara värdena från sessionService
     public string ApartmentNumber
     {
         get { return _sessionService.ApartmentNumber; }

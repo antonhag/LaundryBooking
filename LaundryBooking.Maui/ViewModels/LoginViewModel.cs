@@ -104,14 +104,11 @@ public class LoginViewModel : INotifyPropertyChanged
 
         try
         {
-            // PKCE (Proof Key for Code Exchange) skyddar mot att en annan app
-            // fångar upp authorization code:n och missbrukar den
+            // PKCE (Proof Key for Code Exchange) skyddar mot att en annan app, fångar upp authorization code:n och missbrukar den
             var codeVerifier = GenerateCodeVerifier();
             var codeChallenge = GenerateCodeChallenge(codeVerifier);
 
-            // Bygger upp Google OAuth URL med authorization code flow
-            // response_type=code innebär att Google returnerar en engångskod, inte en token direkt
-            // scope=email%20profile betyder att vi begär tillgång till användarens e-post och profilinfo
+            // Bygger Google OAuth URL med PKCE och begär tillgång till e-post, profil och kalender
             var authUrl = new Uri(
                 $"https://accounts.google.com/o/oauth2/v2/auth" +
                 $"?client_id={_googleAuthSettings.ClientId}" +
@@ -121,8 +118,7 @@ public class LoginViewModel : INotifyPropertyChanged
                 $"&code_challenge={codeChallenge}" +
                 $"&code_challenge_method=S256");
 
-            // Öppnar Googles inloggningssida i en säker webbläsare och väntar på callback
-            // När användaren loggar in omdirigerar Google till vår custom URI (com.companyname...)
+            // Öppnar Googles inloggningssida i systemwebbläsaren och väntar på callback till vår custom URI
             WebAuthenticatorResult result = await
                 WebAuthenticator.Default.AuthenticateAsync(
                     authUrl, new Uri("com.companyname.laundrybooking.maui://"));
@@ -140,7 +136,7 @@ public class LoginViewModel : INotifyPropertyChanged
         }
     }
 
-    // Genererar en slumpmässig Base64URL-kodad sträng som används som hemlig nyckel i PKCE-flödet
+    // Slumpmässig hemlig nyckel för PKCE-flödet, Base64URL-kodad
     private static string GenerateCodeVerifier()
     {
         var bytes = new byte[32];
@@ -151,8 +147,7 @@ public class LoginViewModel : INotifyPropertyChanged
             .Replace('/', '_');
     }
 
-    // Hashar code verifier med SHA256 och Base64URL-kodar resultatet
-    // Skickas med i auth-begäran så Google kan verifiera att det är samma app som begärde koden
+    // SHA256-hash av code verifier – Google verifierar att det är samma app som initierade inloggningen
     private static string GenerateCodeChallenge(string codeVerifier)
     {
         var hash = SHA256.HashData(Encoding.ASCII.GetBytes(codeVerifier));
